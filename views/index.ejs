@@ -6,12 +6,66 @@
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin=""/>
+
+    <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/div.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/main.css" type="text/css" />
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
   </head>
 
   <body>
-    <h1>Hello World!</h1>
+    <nav class="nav-container">
+
+      <!-- NAV BUTTONS -->
+      <form method="GET" action="/wikimaps">
+        <button type="button" class="btn btn-outline-success">WikiMaps</button>
+      </form>
+
+      <form method="GET" action="/register">
+        <button type="button" class="btn btn-outline-primary">Register</button>
+      </form>
+
+      <form method="GET" action="/login">
+        <button type="button" class="btn btn-outline-primary">Login</button>
+
+      </form>
+    </nav>
+
+    <h3 class="filter-input">
+      Find the map that best fits your needs: <input type="city">
+    </h3>
+
+    <div class="div-container">
+
+      <main>
+        <section class="main-section-box">Landmarks 1
+          <div id="mapid-1" > Map 1
+          </section>
+        <section class="main-section-box">Landmarks 2
+          <div id="mapid-2" > Map 2
+          </section>
+        <section class="main-section-box">Landmarks 3
+          <div id="mapid-3" > Map 3
+          </section>
+        <section class="main-section-box">Landmarks 4
+          <div id="mapid-4" > Map 4
+          </section>
+        <section class="main-section-box">Landmarks 5
+          <div id="mapid-5" > Map 5
+          </section>
+        <section class="main-section-box">Landmarks 6
+          <div id="mapid-6" > Map 6
+          </section>
+      </main>
+    </div>
   </body>
 </html>

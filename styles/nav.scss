@@ -1,0 +1,12 @@
+.nav-container {
+  height: 120px;
+  background-color: lightcyan;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+nav button {
+  margin-left: 2em;
+  margin-right: 2em;
+}
