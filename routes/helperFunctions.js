@@ -1,4 +1,13 @@
+// const properties = require('./json/properties.json');
+// const users = require('./json/users.json');
+// const { Pool } = require('pg');
 
+// const pool = new Pool({
+//   user: 'vagrant',
+//   password: '123',
+//   host: 'localhost',
+//   database: 'lightbnb'
+// });
 
 
 
@@ -29,7 +38,7 @@ const getUserWithId = (id) => {
 
 exports.getUserWithId = getUserWithId;
 
-//ADD New User, only registered users can create and edit map
+//ADD New User, only registered users can create and edit maps and points
 const addUser =  ({name, password, email}) => {
 
   const queryString = `INSERT INTO users (name, password, email) VALUES ($1, $2, $3) RETURNING *;`;
@@ -72,8 +81,6 @@ const getUserFavoritesWithId = (id) => {
 exports.getUserFavoritesWithId = getUserFavoritesWithId;
 
 
-
-
 //TO select map_id created by user
 const getUserMapsWithId = (id) => {
 
@@ -92,7 +99,7 @@ exports.getUserMapsWithId = getUserMapsWithId;
 //TO select points created by user
 const getUserPointsWithId = (id) => {
 
-  const queryString = `SELECT points.id FROM points WHERE users.id = $1;`;
+  const queryString = `SELECT points.id FROM points WHERE user_id = $1;`;
   const values = [id];
 
   return pool
@@ -117,6 +124,18 @@ const getMapsFromPoints = (point_id) => {
 
 exports.getMapsFromPoints = getMapsFromPoints;
 
+//Create favorites
+const createFavorites =  ({map_id, user_id}) => {
+
+  const queryString = `INSERT INTO favorites (map_id, user_id VALUES ($1, $2) RETURNING *;`;
+  const values = [map_id, user_id];
+  return pool
+    .query(queryString, values)
+    .then((result) => result.rows[0])
+    .catch((err) => err.message);
+};
+
+exports.createFavorites = createFavorites;
 
 //Create points
 const createPoints =  ({map_id, user_id, title, description, photo_url, lat, long}) => {
@@ -143,3 +162,42 @@ const createMaps =  ({user_id, title, description, photo_url, city, lat, long}) 
 };
 
 exports.createMaps = createMaps;
+
+//Delete a map
+const deleteMap =  ({user_id, map_id}) => {
+
+  const queryString = `DELETE FROM maps WHERE user_id = $1 AND maps.id = $2) VALUES ($1, $2) RETURNING *;`;
+  const values = [user_id, map_id];
+  return pool
+    .query(queryString, values)
+    .then((result) => result.rows[0])
+    .catch((err) => err.message);
+};
+
+exports.deleteMap = deleteMap;
+
+//Delete a point
+const deletePoint =  ({user_id, point_id}) => {
+
+  const queryString = `DELETE FROM points WHERE user_id = $1 AND points.id = $2) VALUES ($1, $2) RETURNING *;`;
+  const values = [user_id, point_id];
+  return pool
+    .query(queryString, values)
+    .then((result) => result.rows[0])
+    .catch((err) => err.message);
+};
+
+exports.deletePoint = deletePoint;
+
+//Delete a favorite
+const deleteFavorite =  ({user_id, map_id}) => {
+
+  const queryString = `DELETE FROM favorites WHERE user_id = $1 AND map_id = $2) VALUES ($1, $2) RETURNING *;`;
+  const values = [user_id, map_id];
+  return pool
+    .query(queryString, values)
+    .then((result) => result.rows[0])
+    .catch((err) => err.message);
+};
+
+exports.deleteFavorite = deleteFavorite;

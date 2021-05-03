@@ -6,11 +6,8 @@ CREATE TABLE users (
   name VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL,
-  --favorite_id INTEGER REFERENCES favorites(id) ON DELETE CASCADE,
   map_id INTEGER REFERENCES maps(id) ON DELETE CASCADE,
-  photo_url VARCHAR(255) NOT NULL,
-  admin BOOLEAN NOT NULL DEFAULT FALSE
-  --dob
+  photo_url VARCHAR(255) NOT NULL
 );
 
 
