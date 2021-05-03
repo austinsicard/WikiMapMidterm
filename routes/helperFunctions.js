@@ -1,15 +1,21 @@
-// const properties = require('./json/properties.json');
-// const users = require('./json/users.json');
-// const { Pool } = require('pg');
+// load .env data into process.env
+require('dotenv').config();
 
-// const pool = new Pool({
-//   user: 'vagrant',
-//   password: '123',
-//   host: 'localhost',
-//   database: 'lightbnb'
-// });
+// save settings from env file in variable
+const user = process.env.DB_USER;
+const password = process.env.DB_PASS;
+const host = process.env.DB_HOST;
+const database = process.env.DB_NAME;
 
-
+// connection with database
+const { Pool } = require('pg');
+// pass in the varibles from env (using shortcut)
+const pool = new Pool({
+  user,
+  password,
+  host,
+  database
+});
 
 //to get a user by email
 const getUserWithEmail = (email) => {

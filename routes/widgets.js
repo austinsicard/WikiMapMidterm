@@ -49,10 +49,10 @@ module.exports = (db) => {
   router.post('/maps/:id', (req, res) => {
     const mapId = req.params;
     // comes from the form
-    const title;
-    const description;
-    const userId; // ?? only for validation 
-    const city; // ?? 
+    // const title;
+    // const description;
+    // const userId; // ?? only for validation 
+    // const city; // ?? 
     db.modifyMap(title, decription)
     .then(result => {
       res.send(result)
@@ -90,18 +90,19 @@ module.exports = (db) => {
   // FIX POINTS ROUTERS ACCORDING TO HOW API WORKS
 
   // add a point
-  router.post('/maps/:id/points')
-  const mapId = req.params;
-  db.addPoint(mapId)
-  .then(result => {
-    res.send(result)
-  })
-  .catch(err => {
-    res.send(err)
+  router.post('/maps/:id/points', (req, res) => {
+    const mapId = req.params;
+    db.addPoint(mapId)
+    .then(result => {
+      res.send(result)
+    })
+    .catch(err => {
+      res.send(err)
+    })
   })
 
   // delete a point
-  router.post('/maps/:mapID/points/:pointId')
+  router.post('/maps/:mapID/points/:pointId', (req, res) => {
   const mapId = req.params.mapId;
   const pointId = req.params.pointId;
   db.deletePoint(mapId, pointId)
@@ -111,6 +112,7 @@ module.exports = (db) => {
   .catch(err => {
     res.send(err)
   })
+})
 
   return router;
 };
