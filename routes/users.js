@@ -9,32 +9,62 @@
 
 const express = require('express');
 const router  = express.Router();
+const { getUserById, getMapsByUser, getFavoritesByUser, getMapsByPoints, getUserByEmail } = require('./helperFunctions');
 
 module.exports = (db) => {
 
-  // What is this one? An list of users? Delete it?
-  router.get("/", (req, res) => {
-    db.query(`SELECT * FROM users;`)
-      .then(data => {
-        const users = data.rows;
-        res.json({ users });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
-
   // user profile
-  router.get('/users/:id', (req, res) => {
-    const id = req.params;
-    db.getUserById(id)
-      .then(data => res.send(data))
+  router.get('/:id', (req, res) => {
+    const id = req.params.id;
+    getUserById(db, id)
+      .then(data => {
+        res.json(data)
+        //res.send(data)
+      })
       .catch(err => {
         console.log(err);
         res.send(err);
       })
+  })
+
+  // list user's map
+  router.get('/:userId/maps', (req, res) => {
+    //const userId = req.session.userId;
+    const userId = req.params.userId;
+    getMapsByUser(db, userId)
+      .then(data => {
+        res.json(data)
+        res.send(data)
+      })
+      .catch(err => {
+        res.send(err)
+      })
+  });
+
+  // list favourites
+  router.get('/:id/favorites', (req, res) => {
+    const userId = req.params.id;
+    //const userId = req.session.userId;
+    getFavoritesByUser(db, userId)
+      .then(data => {
+        res.json(data);
+        //res.send(data)
+      })
+      .catch(err => {
+        res.send(err);
+      })
+  })
+
+  // get maps by user's points => maps, user contributed to
+  router.get('/:userId/maps/points', (req,res) => {
+    const userId = req.params.userId;
+    getMapsByPoints(db, userId)
+    .then(data => {
+      res.send(data)
+    })
+    .catch(err => {
+      res.send(err)
+    })
   })
 
 
