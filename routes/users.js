@@ -11,6 +11,8 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
+
+  // What is this one? An list of users? Delete it?
   router.get("/", (req, res) => {
     db.query(`SELECT * FROM users;`)
       .then(data => {
@@ -23,5 +25,18 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+
+  // user profile
+  router.get('/users/:id', (req, res) => {
+    const id = req.params;
+    db.getUserById(id)
+      .then(data => res.send(data))
+      .catch(err => {
+        console.log(err);
+        res.send(err);
+      })
+  })
+
+
   return router;
 };
