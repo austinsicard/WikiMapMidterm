@@ -84,7 +84,7 @@ exports.getUserFavoritesWithId = getUserFavoritesWithId;
 //TO select map_id created by user
 const getUserMapsWithId = (id) => {
 
-  const queryString = `SELECT map_id FROM users WHERE users.id = $1;`;
+  const queryString = `SELECT maps.id FROM maps WHERE user_id = $1;`;
   const values = [id];
 
   return pool
@@ -125,7 +125,7 @@ const getMapsFromPoints = (point_id) => {
 exports.getMapsFromPoints = getMapsFromPoints;
 
 //Create favorites
-const createFavorites =  ({map_id, user_id}) => {
+const createFavorite =  ({map_id, user_id}) => {
 
   const queryString = `INSERT INTO favorites (map_id, user_id VALUES ($1, $2) RETURNING *;`;
   const values = [map_id, user_id];
@@ -135,10 +135,10 @@ const createFavorites =  ({map_id, user_id}) => {
     .catch((err) => err.message);
 };
 
-exports.createFavorites = createFavorites;
+exports.createFavorite = createFavorite;
 
 //Create points
-const createPoints =  ({map_id, user_id, title, description, photo_url, lat, long}) => {
+const createPoint =  ({map_id, user_id, title, description, photo_url, lat, long}) => {
 
   const queryString = `INSERT INTO points (map_id, user_id, title, description, photo_url, lat, long) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;`;
   const values = [map_id, user_id, title, description, photo_url, lat, long];
@@ -148,10 +148,10 @@ const createPoints =  ({map_id, user_id, title, description, photo_url, lat, lon
     .catch((err) => err.message);
 };
 
-exports.createPoints = createPoints;
+exports.createPoint = createPoint;
 
 //Create maps
-const createMaps =  ({user_id, title, description, photo_url, city, lat, long}) => {
+const createMap =  ({user_id, title, description, photo_url, city, lat, long}) => {
 
   const queryString = `INSERT INTO maps (user_id, title, description, photo_url, city, lat, long) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;`;
   const values = [user_id, title, description, photo_url, city, lat, long];
@@ -161,12 +161,12 @@ const createMaps =  ({user_id, title, description, photo_url, city, lat, long}) 
     .catch((err) => err.message);
 };
 
-exports.createMaps = createMaps;
+exports.createMap = createMap;
 
 //Delete a map
 const deleteMap =  ({user_id, map_id}) => {
 
-  const queryString = `DELETE FROM maps WHERE user_id = $1 AND maps.id = $2) VALUES ($1, $2) RETURNING *;`;
+  const queryString = `DELETE FROM maps WHERE user_id = $1 AND maps.id = $2) VALUES ($1, $2);`;
   const values = [user_id, map_id];
   return pool
     .query(queryString, values)
@@ -179,7 +179,7 @@ exports.deleteMap = deleteMap;
 //Delete a point
 const deletePoint =  ({user_id, point_id}) => {
 
-  const queryString = `DELETE FROM points WHERE user_id = $1 AND points.id = $2) VALUES ($1, $2) RETURNING *;`;
+  const queryString = `DELETE FROM points WHERE user_id = $1 AND points.id = $2) VALUES ($1, $2);`;
   const values = [user_id, point_id];
   return pool
     .query(queryString, values)
@@ -192,7 +192,7 @@ exports.deletePoint = deletePoint;
 //Delete a favorite
 const deleteFavorite =  ({user_id, map_id}) => {
 
-  const queryString = `DELETE FROM favorites WHERE user_id = $1 AND map_id = $2) VALUES ($1, $2) RETURNING *;`;
+  const queryString = `DELETE FROM favorites WHERE user_id = $1 AND map_id = $2) VALUES ($1, $2);`;
   const values = [user_id, map_id];
   return pool
     .query(queryString, values)
