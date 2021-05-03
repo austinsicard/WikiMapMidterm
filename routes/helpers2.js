@@ -26,6 +26,7 @@ const createMap = (map) => {  // refer to addProperty in lightBnB/database/addPr
   )`)
     // got owner id from req.session.user_id, other values come from '...req.body'
     .then(result => {
+      console.log(result.rows)
       return result.rows
     })
     .catch((err) => {
@@ -56,7 +57,11 @@ const addToFavourite = (userId, mapId) => {
 };
 exports.addToFavourite = addToFavourite;
 
-const listMaps = (options, limit = 10) => { };
+const listMaps = (options, limit = 10) => { 
+  const sql = `SELECT title FROM maps`
+  pool.query(sql)
+  .then()
+ };
 exports.listMaps = listMaps;
 
 const getMapById = (id) => { };

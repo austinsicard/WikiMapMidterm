@@ -7,66 +7,78 @@
 
 const express = require('express');
 const router  = express.Router();
-
-// app.use("/api/widgets", usersRoutes(db));
+const { getMapById, listMaps, addFavorite, addPoint, addMap, deleteMap, deletePoint, deleteFavorite } = require('./helperFunctions');
 
 // main page
-
 module.exports = (db) => {
-  router.get("/maps", (req, res) => {
-      db.listMaps(req.query, 10) //return a promise with filtered data
-      .then(data => res.send(data)) // send the data to the server.js
+  router.get("/", (req, res) => {
+      listMaps(db, req.query, 10) //return a promise with filtered data
+      .then(data => {
+        res.send(data)
+      })
       .catch(err => {
-        console.log(err);
         res.send(err); // if error send to server (put it in pop up message or something)
       })
   });
 
+  // create a map
+  router.post('/', (req, res) => {
+    const userId = req.session.userId; // access session data (like cookie)
+    addMap(db, { ...req.body, owner_id: userId })
+      .then(map => {
+        res.send(map);
+      })
+      .catch((err) => {
+        res.send(err)
+      })
+  })
+
   // individual map
-  router.get('/maps/:id', (req, res) => {
-    const id = req.params;
-    db.getMapById(id)
-      .then(data => res.send(data))
+  router.get('/:id', (req, res) => {
+    const id = req.params.id;
+    getMapById(db, id)
+      .then(data => {
+        res.json(data)
+        // res.send(data)
+      })
       .catch(err => {
       console.log(err);
       res.send(err);
       })
     })
 
-  // create a map
-  router.post('/maps', (req, res) => {
-    const userId = req.session.userId; // access session data
-    db.createMap({...req.body, owner_id: userId})
-    .then(map => {
-      res.send(map);
-    })
-    .catch((err) => {
-      res.send(err)
-    })
-  })
-
   // modify a map
-  router.post('/maps/:id', (req, res) => {
-    const mapId = req.params;
+  router.post('/:id', (req, res) => {
+    const mapId = req.params.id;
     // comes from the form
-    // const title;
-    // const description;
-    // const userId; // ?? only for validation 
-    // const city; // ?? 
-    db.modifyMap(title, decription)
-    .then(result => {
-      res.send(result)
-    })
-    .catch(err => {
-      res.send(err)
-    })
+    const modifications = { ...req.body, id: mapId } // check how it works with form
+    editMap(db, modifications)
+      .then(result => {
+        res.send(result)
+      })
+      .catch(err => {
+        res.send(err)
+      })
   })
 
-  // add to favourites
-  router.post('/maps/:id', (req, res) => {
+  // add to favorites
+  router.post('/:id/favorites', (req, res) => {
     const userId = req.session.userId; // access session data
-    const mapId = req.params;
-    db.createMap(userId, mapId) // returns a new 'favourites' table
+    const mapId = req.params.id;
+    addFavorite(db, mapId, userId) // returns a new 'favourites' table
+      .then(result => {
+        res.send(result)
+      })
+      .catch(err => {
+        res.send(err)
+      })
+  })
+
+  // delete a favorite map
+  router.post('/:userId/favorites/:mapId/delete', (req, res) => {
+    const userId = req.params.userId;
+    const mapId = req.params.mapId;
+    deleteFavorite(db, userId, mapId)
     .then(result => {
       res.send(result)
     })
@@ -76,23 +88,23 @@ module.exports = (db) => {
   })
   
   // delete a map
-  router.post('/maps/:id', (req, res) => {
-    const mapId = req.params;
-    db.deleteMap(mapId)
+  router.post('/:id/delete', (req, res) => {
+    const mapId = req.params.id;
+    deleteMap(db, mapId)
     .then(result => {
       res.send(result)
     })
     .catch(err => {
-      res.send(result)
+      res.send(err)
     })
   })
 
   // FIX POINTS ROUTERS ACCORDING TO HOW API WORKS
 
   // add a point
-  router.post('/maps/:id/points', (req, res) => {
-    const mapId = req.params;
-    db.addPoint(mapId)
+  router.post('/:id/points', (req, res) => {
+    const mapId = req.params.id;
+    addPoint(db, mapId)
     .then(result => {
       res.send(result)
     })
@@ -102,10 +114,10 @@ module.exports = (db) => {
   })
 
   // delete a point
-  router.post('/maps/:mapID/points/:pointId', (req, res) => {
+  router.post('/:mapID/points/:pointId', (req, res) => {
   const mapId = req.params.mapId;
   const pointId = req.params.pointId;
-  db.deletePoint(mapId, pointId)
+  deletePoint(db, mapId, pointId) // add user id?
   .then(result => {
     res.send(result)
   })
