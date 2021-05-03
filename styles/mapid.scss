@@ -1,0 +1,55 @@
+.mapid-h2 {
+  display:flex;
+  justify-content: center;
+  margin-top: 2em;
+}
+
+.mapid-p {
+  position: absolute;
+  width: 467px;
+  height: 82px;
+  left: 160px;
+  top: 407px;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 28px;
+}
+.mapid {
+  position: absolute;
+  width: 500px;
+  height: 333px;
+  left: 780px;
+  top: 345px;
+  background-color: black;
+}
+.button-mapid {
+
+  position: absolute;
+  width: 145px;
+  height: 44px;
+  left: 163px;
+  top: 631px;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 21px;
+  text-align: center;
+}
+.mapid-user {
+  position: absolute;
+  width: 205px;
+  height: 46px;
+  left: 160px;
+  top: 345px;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 21px;
+}

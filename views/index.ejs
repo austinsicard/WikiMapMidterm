@@ -10,7 +10,7 @@
    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
    crossorigin=""/>
 
-    <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/header.css" type="text/css" />
     <link rel="stylesheet" href="/styles/div.css" type="text/css" />
     <link rel="stylesheet" href="/styles/main.css" type="text/css" />
 
@@ -22,31 +22,16 @@
     crossorigin=""></script>
   </head>
 
+
   <body>
-    <nav class="nav-container">
-
-      <!-- NAV BUTTONS -->
-      <form method="GET" action="/wikimaps">
-        <button type="button" class="btn btn-outline-success">WikiMaps</button>
-      </form>
-
-      <form method="GET" action="/register">
-        <button type="button" class="btn btn-outline-primary">Register</button>
-      </form>
-
-      <form method="GET" action="/login">
-        <button type="button" class="btn btn-outline-primary">Login</button>
-
-      </form>
-    </nav>
-
+    <%- include('partials/_header') %>
     <h3 class="filter-input">
       Find the map that best fits your needs: <input type="city">
     </h3>
 
     <div class="div-container">
 
-      <main>
+      <main class="index-main">
         <section class="main-section-box">Landmarks 1
           <div id="mapid-1" > Map 1
           </section>
