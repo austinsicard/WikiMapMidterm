@@ -1,9 +1,24 @@
 .index-main {
+  display: flex;
+  padding-top: 50px;
   width: 80%;
   height: 80%;
-  // border: 2px solid blue;
-  align-self: center;
-  // background-color: lightcyan;
-  columns: 3;
-  text-align: center;
+  align-content: space-between;
+  columns: 2;
+  background-color: #F5F0E4;
+  text-align: start;
+}
+
+.heading {
+  font-family: 'Cormorant', serif;
+  font-size: 62px;
+  text-align: start;
+  padding-left: 10%;
+}
+
+.par {
+  font-family: 'Cormorant', serif;
+  font-size: 24px;
+  text-align: start;
+  padding-left: 10%;
 }
