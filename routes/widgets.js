@@ -12,8 +12,8 @@ const { getMapById, listMaps, addFavorite, addPoint, addMap, deleteMap, deletePo
 // main page
 module.exports = (db) => {
   router.get("/", (req, res) => {
-      listMaps(db, req.query, 10) //return a promise with filtered data
-      .then(data => {
+      listMaps(db) //return a promise with filtered data
+      .then(data => { //UNDEFINED
         res.send(data)
       })
       .catch(err => {
