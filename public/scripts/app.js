@@ -30,12 +30,13 @@ const createMapElement = function (map) {
 
   // HTML FOR A MAP CONTAINER
   $('.index-main').prepend(
-    `<section>
-    <div id="map-${mapid}" style="width: 200px; height: 100px; position: relative;"></div>
+    `<section class=mainmap>
        <div id="mapid-1" > ${title} </div>
-            <p>${description}</p>
-        </section> `
+       <p>${description}</p>
+       <div id="map-${mapid}" style="width: 100%; height: 20em; position: relative;"></div>
+    </section> `
   );
+
 
 let mymap = L.map(`map-${mapid}`).setView([lat, long], 12);
             L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
