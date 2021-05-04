@@ -27,8 +27,6 @@ const createMapElement = function (map) {
   const lat = map.lat;
   const long = map.long;
   const mapid = map.id
-  console.log("something", lat, long)
-
 
 
 
@@ -41,12 +39,9 @@ const createMapElement = function (map) {
             <p>${description}</p>
         </section> `
   );
- console.log("ending", L);
+
 let maptest =  document.getElementById(`map-${mapid}`);
-console.log(maptest);
-console.log($(`.index-main`).html())
 let mymap = L.map(`map-${mapid}`).setView([lat, long], 12);
-            console.log("string", mymap);
             L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
             maxZoom: 18,
