@@ -38,10 +38,16 @@ exports.addUser = addUser;
 // WIDGETS
 
 // list maps
-const listMaps = (db, options, limit = 10) => {
-  const sql = `SELECT title FROM maps`
-  db.query(sql)
-    .then()
+const listMaps = (db) => {
+  const sql = `SELECT maps.* FROM maps`
+  return db
+    .query(sql)
+    .then(result => {
+      return result.rows;
+    })
+    .catch(err => {
+      return err.message;
+    })
 };
 exports.listMaps = listMaps;
 
@@ -69,6 +75,7 @@ const getFavoritesByUser = (db, id) => {
   WHERE users.id = favorites.user_id
   AND users.id = $1;
   `;
+  const values = [id];
   return db
     .query(queryString, values)
     .then((result) => result.rows)
