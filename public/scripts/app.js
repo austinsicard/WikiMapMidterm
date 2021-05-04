@@ -28,9 +28,6 @@ const createMapElement = function (map) {
   const long = map.long;
   const mapid = map.id
 
-
-
-
   // HTML FOR A MAP CONTAINER
   $('.index-main').prepend(
     `<section>
@@ -40,7 +37,6 @@ const createMapElement = function (map) {
         </section> `
   );
 
-let maptest =  document.getElementById(`map-${mapid}`);
 let mymap = L.map(`map-${mapid}`).setView([lat, long], 12);
             L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -50,9 +46,4 @@ let mymap = L.map(`map-${mapid}`).setView([lat, long], 12);
             zoomOffset: -1,
             accessToken: 'pk.eyJ1IjoiZHVyYWJpbGxpYW0iLCJhIjoiY2tvYTBtdXQ3Mm1odjJwcXd3MXkycmptcCJ9.NfmIqQQjSypgKHZciDx8rg'
             }).addTo(mymap);
-
-
-
-
-
 };
