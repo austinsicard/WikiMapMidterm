@@ -53,6 +53,12 @@ app.get("/", (req, res) => {
 app.get("/map", (req, res) => {
   res.render("map_id");
 });
+app.get("/point", (req, res) => {
+  res.render("point");
+});
+app.get("/createPoint", (req, res) => {
+  res.render("createPoint");
+});
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
