@@ -34,7 +34,7 @@ module.exports = (db) => {
     getMapsByUser(db, userId)
       .then(data => {
         res.json(data)
-        res.send(data)
+        // res.send(data)
       })
       .catch(err => {
         res.send(err)
