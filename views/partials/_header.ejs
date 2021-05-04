@@ -1,12 +1,17 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+-->
+
+<link rel="stylesheet" href="/styles/header.css" type="text/css"></link>
 <header class="header-container">
 
   <!-- NAV BUTTONS -->
 
-  <form method="GET" action="/wikimaps">
-    <button type="button" class="btn btn-outline-success">WikiMaps</button>
+  <form method="GET" action="/maps">
+    <p type="button" id="logo" >WikiMaps</p>
   </form>
 
+
+  <div class="right-btns">
   <form method="GET" action="/register">
     <button type="button" class="btn btn-outline-primary">Register</button>
   </form>
@@ -14,4 +19,6 @@
   <form method="GET" action="/login">
     <button type="button" class="btn btn-outline-primary">Login</button>
   </form>
+</div>
+
 </header>
