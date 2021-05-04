@@ -31,8 +31,8 @@
 //   border:2px solid black;
 // }
 .mapid {
-  width: 25em;
-  height: 30em;
+  width: 30em;
+  height: 25em;
   background-color: black;
   border: 2px solid black;
   align-items: baseline;
@@ -67,3 +67,7 @@
 //   line-height: 21px;
 //   border:2px solid black;
 // }
+.h2-createPoint {
+  display: flex;
+  margin-left: 6em;
+}
