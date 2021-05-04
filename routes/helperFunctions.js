@@ -69,6 +69,7 @@ const getFavoritesByUser = (db, id) => {
   WHERE users.id = favorites.user_id
   AND users.id = $1;
   `;
+  const values = [id];
   return db
     .query(queryString, values)
     .then((result) => result.rows)

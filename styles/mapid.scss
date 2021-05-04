@@ -1,55 +1,69 @@
+.test1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
 .mapid-h2 {
   display:flex;
   justify-content: center;
   margin-top: 2em;
+  border:2px solid black;
+}
+.test2 {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 8em;
 }
 
-.mapid-p {
-  position: absolute;
-  width: 467px;
-  height: 82px;
-  left: 160px;
-  top: 407px;
+// .mapid-p {
+//   position: absolute;
+//   width: 467px;
+//   height: 82px;
+//   left: 160px;
+//   top: 407px;
 
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 24px;
-  line-height: 28px;
-}
+//   font-family: Roboto;
+//   font-style: normal;
+//   font-weight: normal;
+//   font-size: 24px;
+//   line-height: 28px;
+//   border:2px solid black;
+// }
 .mapid {
-  position: absolute;
-  width: 500px;
-  height: 333px;
-  left: 780px;
-  top: 345px;
+  width: 25em;
+  height: 30em;
   background-color: black;
+  border: 2px solid black;
+  align-items: baseline;
 }
-.button-mapid {
+// .button-mapid {
 
-  position: absolute;
-  width: 145px;
-  height: 44px;
-  left: 163px;
-  top: 631px;
+//   position: absolute;
+//   width: 145px;
+//   height: 44px;
+//   left: 163px;
+//   top: 631px;
 
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 18px;
-  line-height: 21px;
-  text-align: center;
-}
-.mapid-user {
-  position: absolute;
-  width: 205px;
-  height: 46px;
-  left: 160px;
-  top: 345px;
+//   font-family: Roboto;
+//   font-style: normal;
+//   font-weight: normal;
+//   font-size: 18px;
+//   line-height: 21px;
+//   text-align: center;
+//   border:2px solid black;
+// }
+// .mapid-user {
+//   position: absolute;
+//   width: 205px;
+//   height: 46px;
+//   left: 160px;
+//   top: 345px;
 
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 18px;
-  line-height: 21px;
-}
+//   font-family: Roboto;
+//   font-style: normal;
+//   font-weight: normal;
+//   font-size: 18px;
+//   line-height: 21px;
+//   border:2px solid black;
+// }
