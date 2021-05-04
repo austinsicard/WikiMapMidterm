@@ -38,10 +38,16 @@ exports.addUser = addUser;
 // WIDGETS
 
 // list maps
-const listMaps = (db, options, limit = 10) => {
-  const sql = `SELECT title FROM maps`
-  db.query(sql)
-    .then()
+const listMaps = (db) => {
+  const sql = `SELECT maps.* FROM maps`
+  return db
+    .query(sql)
+    .then(result => {
+      return result.rows;
+    })
+    .catch(err => {
+      return err.message;
+    })
 };
 exports.listMaps = listMaps;
 
