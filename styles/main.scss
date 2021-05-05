@@ -1,13 +1,34 @@
 .index-main {
   display: flex;
-  padding-top: 50px;
-  width: 80%;
-  height: 80%;
+  padding-top: 5em;
+  width: 65em;
+  height: 50em;
   align-content: space-between;
-  columns: 2;
   background-color: #F5F0E4;
   text-align: center;
   flex-wrap: wrap;
   justify-content: space-between;
+  font-family: 'Cormorant', serif;
 }
+
+.heading{
+  font-family: 'Cormorant', serif;
+  font-size: 4em;
+}
+
+
+.par{
+  font-family: 'Cormorant', serif;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  display: flex;
+}
+
+.mainmap{
+  font-family: 'Cormorant', serif;
+  font-size: 1.2em;
+}
+
+
 
