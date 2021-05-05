@@ -49,16 +49,10 @@ app.use("/maps", widgetsRoutes(db));
 app.get("/", (req, res) => {
   res.render("index");
 });
-// add more
+
 app.get("/map", (req, res) => {
-  res.render("map_id");
-});
-app.get("/point", (req, res) => {
-  res.render("point");
-});
-app.get("/createPoint", (req, res) => {
-  res.render("createPoint");
-});
+  res.render("map_id")
+})
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
