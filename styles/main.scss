@@ -6,19 +6,8 @@
   align-content: space-between;
   columns: 2;
   background-color: #F5F0E4;
-  text-align: start;
+  text-align: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-// .heading {
-//   font-family: 'Cormorant', serif;
-//   font-size: 62px;
-//   text-align: start;
-//   padding-left: 10%;
-// }
-
-// .par {
-//   font-family: 'Cormorant', serif;
-//   font-size: 24px;
-//   text-align: start;
-//   padding-left: 10%;
-// }
