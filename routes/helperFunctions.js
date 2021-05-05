@@ -98,16 +98,28 @@ const getMapsByUser = (db, id) => {
 
 exports.getMapsByUser = getMapsByUser;
 
-//TO select points created by user
-// const getPointsByUser = (db, id) => {
-//   const queryString = `SELECT points.id FROM points WHERE user_id = $1;`;
-//   const values = [id];
-//   return db
-//     .query(queryString, values)
-//     .then((result) => result.rows[0])
-//     .catch((err) => null);
-// };
-// exports.getPointsByUser = getPointsByUser;
+// TO select points created by id
+const getPointsById = (db, id) => {
+  const queryString = `SELECT points.* FROM points WHERE points.id = $1;`;
+  const values = [id];
+  return db
+    .query(queryString, values)
+    .then((result) => result.rows[0])
+    .catch((err) => null);
+};
+exports.getPointsById = getPointsById;
+
+
+// get points by map
+const getPointsByMap = (db, id) => {
+  const queryString = `SELECT points.* FROM points WHERE map_id = $1;`;
+  const values = [id];
+  return db
+    .query(queryString, values)
+    .then((result) => result.rows)
+    .catch((err) => null);
+};
+exports.getPointsByMap = getPointsByMap;
 
 
 // maps, user contributed to

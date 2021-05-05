@@ -7,7 +7,9 @@
 
 const express = require('express');
 const router  = express.Router();
-const { getMapById, listMaps, addFavorite, addPoint, addMap, deleteMap, deletePoint, deleteFavorite } = require('./helperFunctions');
+const { getMapById, getPointsById, getPointsByMap, listMaps, addFavorite, addPoint, addMap, deleteMap, deletePoint, deleteFavorite } = require('./helperFunctions');
+
+// API ENDPOINT RESPONSIBLE FOR DATA
 
 // main page
 module.exports = (db) => {
@@ -36,10 +38,11 @@ module.exports = (db) => {
   // individual map
   router.get('/:id', (req, res) => {
     const id = req.params.id;
+    console.log(id)
     getMapById(db, id)
       .then(data => {
-        res.json(data)
-        // res.send(data)
+        console.log('Data from function: ' + data)
+        res.send(data);
       })
       .catch(err => {
       console.log(err);
@@ -100,6 +103,31 @@ module.exports = (db) => {
   })
 
   // FIX POINTS ROUTERS ACCORDING TO HOW API WORKS
+
+  // get point by point id
+  router.get('/points/:id', (req, res) => {
+    const pointId = req.params.id;
+    getPointsById(db, pointId)
+    .then (result => {
+      res.send(result);
+    })
+    .catch(err => {
+      res.send(err.message);
+    })
+  })
+
+  // get point by map id
+  router.get('/:id/points', (req, res) => {
+    const mapId = req.params.id;
+    getPointsByMap(db, mapId)
+    .then(result => {
+        console.log(result)
+        res.send(result);
+      })
+      .catch(err => {
+        res.send(err.message);
+      })
+  })
 
   // add a point
   router.post('/:id/points', (req, res) => {

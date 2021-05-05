@@ -1,23 +1,41 @@
 // pull out the maps from server database
-
-$(() => loadMaps()); // how does it know which page to load?
+$(() => {
+  console.log('Page loaded, ajax running')
+  loadMap();
+})
 
 // get data from endpoint
-const loadMaps = function () {
-  $.ajax('/maps', { method: 'GET' })
+const loadMap = function () {
+  $.ajax('/maps/1', { method: 'GET' }) // mapid is in endpoint
     .then(data => {
-      renderMaps(data);
+      console.log('I am ajax. Data: ' + data) // can be an array -- index [0]???
+      createMapHTML(data);
     })
     .catch(err => {
+      res.send(err)
+    })
+
+  $.ajax('/maps/1/points', { method: 'GET' })
+    .then(data => {
+      renderPoints(data);
+    })
+    .catch(err => {
+      res.send(err);
     })
 };
 
-// loop through the array of map objects
-const renderMaps = function (data) { // data is an array of objects
-  for (let map of data) { // map is one object with one tweet
-    createMapHTML(map);
+
+// loop through the array of point object
+const renderPoints = function(data) {
+  for (let point of data) {
+    connectToMap(point);
   }
 };
+
+const connectToMap = function(point) {
+  //connect the point to the map
+}
+
 
 // create map with leaflets
 const createMapElement = function (mapId, lat, long) {
@@ -35,6 +53,8 @@ const createMapElement = function (mapId, lat, long) {
 
 //create new map container
 const createMapHTML = function (map) {
+  console.log(map)
+  const user = map.user_id
   const title = map.title;
   const description = map.description;
   const lat = map.lat;
@@ -43,24 +63,18 @@ const createMapHTML = function (map) {
 
   // HTML for a map container
   $('#main-content').prepend(
-     `<div class='title'>
-        <span class="heading">
-          Maps of the month
-        </span>
-        <p class="par"> Explore the world with the most popular maps among Wikimaps users in may 2021 </p>
+    `<h2 class="mapid-h2" id="title">${title}</h2>
+     <div class="test1">
+        <p class="mapid-user">Map belongs to: ${user}</p>
+        <p class="mapid-p">${description}</p>
+        <button class="button-mapid">Add to Favourites</button>
       </div>
-      <div class="div-container">
-        <main class="index-main">
-          < section class= mainmap >
-            <a href="/maps/${mapid}"> ${title} </a>
-            <p>${description}</p>
-            <div id="map-${mapid}" style="width: 100%; height: 20em; position: relative;"></div>
-          </section >
-        </main>
-      </div>`
+      <section class=mainmap>
+        <div id="map-${mapid}" style="width: 100%; height: 20em; position: relative;">
+        </div>
+      </section>`
   );
 
   // create map element from leaflets
   createMapElement(mapid, lat, long);
 };
-
