@@ -4,42 +4,55 @@ $(() => {
   loadMap();
 })
 
+let mymap;
+
 // get data from endpoint
 const loadMap = function () {
-  $.ajax('/maps/1', { method: 'GET' }) // mapid is in endpoint
+  $.ajax('/maps/6', { method: 'GET' }) // mapid is in endpoint
     .then(data => {
-      console.log('I am ajax. Data: ' + data) // can be an array -- index [0]???
       createMapHTML(data);
+      $.ajax('/maps/6/points', { method: 'GET' })
+       .then(data => {
+        renderPoints(data);
+       })
+       .catch(err => {
+        res.send(err);
     })
+  })
     .catch(err => {
-      res.send(err)
     })
 
-  $.ajax('/maps/1/points', { method: 'GET' })
-    .then(data => {
-      renderPoints(data);
-    })
-    .catch(err => {
-      res.send(err);
-    })
+
 };
 
 
 // loop through the array of point object
 const renderPoints = function(data) {
   for (let point of data) {
-    connectToMap(point);
+    createPointElement(point);
   }
 };
 
-const connectToMap = function(point) {
-  //connect the point to the map
+
+const createPointElement = function (point){
+  let id = point.id
+  let lat = point.lat
+  let long = point.long
+  let title = point.title
+  let description = point.description
+  let pic = point.photo_url
+  let popupinfo = `<div style = display: flex; flex-direction: column; align-items: center;><b>${title}</b><br><img src=${pic} style=width:50px;height:60px;><br>${description}</div>`
+  console.log("HELP", id, lat, long, title, description, pic)
+  marker = L.marker([lat, long]).addTo(mymap);
+  marker.bindPopup(popupinfo).openPopup();
+  popup = L.popup();
+  return point;
 }
 
-
 // create map with leaflets
+
 const createMapElement = function (mapId, lat, long) {
-  let mymap = L.map(`map-${mapId}`).setView([lat, long], 12);
+   mymap = L.map(`map-${mapId}`).setView([lat, long], 12);
   L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
@@ -48,6 +61,9 @@ const createMapElement = function (mapId, lat, long) {
     zoomOffset: -1,
     accessToken: 'pk.eyJ1IjoiZHVyYWJpbGxpYW0iLCJhIjoiY2tvYTBtdXQ3Mm1odjJwcXd3MXkycmptcCJ9.NfmIqQQjSypgKHZciDx8rg'
   }).addTo(mymap);
+    //createPointElement(lat, long)
+
+
   return mymap;
 }
 
@@ -78,6 +94,8 @@ const createMapHTML = function (map) {
         </div>
       </section>`
   );
+
+
 
   // create map element from leaflets
   createMapElement(mapid, lat, long);
