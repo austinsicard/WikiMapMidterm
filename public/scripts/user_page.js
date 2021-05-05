@@ -42,16 +42,16 @@ const createUserHTML = (user) => {
           <button type="submit">Create map</button>
         </form>
 
-        <form method="GET" action="/">
+        <form method="GET" action="/user-maps">
           <button type="submit">My maps</button>
         </form>
 
-        <form method="GET" action="/">
+        <form method="GET" action="/user-points">
           <button type="submit">My points</button>
         </form>
 
-        <form method="GET" action="/">
-          <button type="submit">My favourites</button>
+        <form method="GET" action="/favorites">
+          <button type="submit">My favorites</button>
         </form>
 
     </div>
