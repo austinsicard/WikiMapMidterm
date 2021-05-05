@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Point</title>
+  <title>Map ID</title>
 
 
   <link rel="stylesheet" href="/styles/header.css" type="text/css" />
@@ -14,13 +14,18 @@
 </head>
 <body>
   <%- include('partials/_header') %>
-  <h2 class="mapid-h2" id="title">Best French Onion Soup In Montreal</h2>
+  <p style="margin-top: 4em;
+  margin-left: 9em;">Add point to map:</p>
+  <h2 class="h2-createPoint" id="title">Best French Onion Soup In Montreal</h2>
 
   <div class="test2">
     <div class="test1">
-    <p class="mapid-user">Map: Name of Point goes here</p>
-    <p class="mapid-p">Random fact about point goes here</p>
 
+      Title:
+    <input class="mapid-user"></input>
+
+    Description:
+    <input class="mapid-p"></input>
   <!--
     <form action="/">
       <label for="title">Map Title</label><br>
@@ -29,6 +34,7 @@
     </form> -->
   <!-- http://localhost:8080/?title=New+York -->
 
+    <button class="button-mapid">Add Point</button>
   </div>
 
     <div class="mapid"></div>
