@@ -33,7 +33,7 @@ const createMapElement = function (map) {
     `<section class=mainmap>
        <div id="mapid-1" > ${title} </div>
        <p>${description}</p>
-       <div id="map-${mapid}" style="width: 100%; height: 20em; position: relative;"></div>
+       <div id="map-${mapid}" style="width: 25em; height: 20em; position: relative;"></div>
     </section> `
   );
 
