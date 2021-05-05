@@ -67,7 +67,11 @@ const createMapHTML = function (map) {
      <div class="test1">
         <p class="mapid-user">Map belongs to: ${user}</p>
         <p class="mapid-p">${description}</p>
-        <button class="button-mapid">Add to Favourites</button>
+
+        <form method="POST" action="/${mapid}/favorites">
+          <button id="fav-btn" type="submit">Add to Favorites</button>
+        </form>
+
       </div>
       <section class=mainmap>
         <div id="map-${mapid}" style="width: 100%; height: 20em; position: relative;">
@@ -77,4 +81,23 @@ const createMapHTML = function (map) {
 
   // create map element from leaflets
   createMapElement(mapid, lat, long);
+
+  // $('#fav-btn').click(function(event) {
+  //   event.preventDefault();
+  //   $.ajax({
+  //     type: "POST",
+  //     url: `/${mapid}/favorites`,
+  //     data: {
+  //       id: $(this).val(),
+  //     },
+  //     success: function (result) {
+  //       alert('ok');
+  //     },
+  //     error: function (result) {
+  //       alert('error');
+  //     }
+  //   });
+  // });
+
+
 };
