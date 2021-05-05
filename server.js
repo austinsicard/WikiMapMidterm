@@ -49,8 +49,9 @@ app.use("/maps", widgetsRoutes(db));
 app.get("/", (req, res) => {
   res.render("index");
 });
-// add more
+
 app.get("/map", (req, res) => {
+<<<<<<< HEAD
   res.render("map_id");
 });
 app.get("/point", (req, res) => {
@@ -62,6 +63,10 @@ app.get("/createPoint", (req, res) => {
 app.get("/createMap", (req, res) => {
   res.render("createMap");
 });
+=======
+  res.render("map_id")
+})
+>>>>>>> links
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

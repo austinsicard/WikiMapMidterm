@@ -36,10 +36,11 @@ module.exports = (db) => {
   // individual map
   router.get('/:id', (req, res) => {
     const id = req.params.id;
+    console.log(id)
     getMapById(db, id)
       .then(data => {
-        res.json(data)
-        // res.send(data)
+        console.log('Data from function: ' + data)
+        res.send(data);
       })
       .catch(err => {
       console.log(err);
