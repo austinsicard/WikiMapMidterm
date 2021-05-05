@@ -31,9 +31,9 @@ const createMapElement = function (map) {
   // HTML FOR A MAP CONTAINER
   $('.index-main').prepend(
     `<section class=mainmap>
-       <div id="mapid-1" > ${title} </div>
+       <a id="mapid-1" href="http://localhost:8080/maps/${mapid}">${title}</a>
        <p>${description}</p>
-       <div id="map-${mapid}" style="width: 100%; height: 20em; position: relative;"></div>
+       <div id="map-${mapid}" style="width: 25em; height: 20em; position: relative;"></div>
     </section> `
   );
   
