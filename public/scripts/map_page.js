@@ -1,12 +1,12 @@
 // pull out the maps from server database
 $(() => {
   console.log('Page loaded, ajax running')
-  loadMap;
+  loadMap();
 })
 
 // get data from endpoint
 const loadMap = function () {
-  $.ajax('/maps/:id', { method: 'GET' })
+  $.ajax('/maps/1', { method: 'GET' }) // mapid is in endpoint
     .then(data => {
       console.log('I am ajax. Data: ' + data) // can be an array -- index [0]???
       createMapHTML(data);
@@ -14,7 +14,28 @@ const loadMap = function () {
     .catch(err => {
       res.send(err)
     })
+
+  $.ajax('/maps/1/points', { method: 'GET' })
+    .then(data => {
+      renderPoints(data);
+    })
+    .catch(err => {
+      res.send(err);
+    })
 };
+
+
+// loop through the array of point object
+const renderPoints = function(data) {
+  for (let point of data) {
+    connectToMap(point);
+  }
+};
+
+const connectToMap = function(point) {
+  //connect the point to the map
+}
+
 
 // create map with leaflets
 const createMapElement = function (mapId, lat, long) {
@@ -48,12 +69,10 @@ const createMapHTML = function (map) {
         <p class="mapid-p">${description}</p>
         <button class="button-mapid">Add to Favourites</button>
       </div>
-      <div class="mapid">
-      </div>
       <section class=mainmap>
         <div id="map-${mapid}" style="width: 100%; height: 20em; position: relative;">
         </div>
-      </section> `
+      </section>`
   );
 
   // create map element from leaflets
