@@ -39,6 +39,18 @@ module.exports = (db) => {
     res.render("createPoint")
   })
 
+  router.get("/favorites", (req, res) => {
+    res.render("favorites")
+  })
+
+  router.get("/user-maps", (req, res) => {
+    res.render("userMaps")
+  })
+
+  router.get("/user-points", (req, res) => {
+    res.render("userPoints")
+  })
+
 
 
 
