@@ -18,8 +18,7 @@ module.exports = (db) => {
     const id = req.params.id;
     getUserById(db, id)
       .then(data => {
-        res.json(data)
-        //res.send(data)
+        res.send(data)
       })
       .catch(err => {
         console.log(err);
@@ -41,14 +40,13 @@ module.exports = (db) => {
       })
   });
 
-  // list favourites
+  // list favorites
   router.get('/:id/favorites', (req, res) => {
     const userId = req.params.id;
-    //const userId = req.session.userId;
     getFavoritesByUser(db, userId)
       .then(data => {
-        res.json(data);
-        //res.send(data)
+        console.log('Router works: ' + data)
+        res.send(data);
       })
       .catch(err => {
         res.send(err);
