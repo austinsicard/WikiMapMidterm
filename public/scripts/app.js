@@ -41,15 +41,6 @@ const createMapHTML = function (map) {
   const long = map.long;
   const mapid = map.id
 
-<<<<<<< HEAD
-  // HTML FOR A MAP CONTAINER
-  $('.index-main').prepend(
-    `<section class=mainmap>
-       <a id="mapid-1" href="http://localhost:8080/maps/${mapid}">${title}</a>
-       <p>${description}</p>
-       <div id="map-${mapid}" style="width: 25em; height: 20em; position: relative;"></div>
-    </section> `
-=======
   // HTML for a map container
   $('#main-content').prepend(
      `<div class='title'>
@@ -67,7 +58,6 @@ const createMapHTML = function (map) {
           </section >
         </main>
       </div>`
->>>>>>> links
   );
 
   // create map element from leaflets
