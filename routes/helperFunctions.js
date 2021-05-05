@@ -66,7 +66,6 @@ exports.getMapById= getMapById;
 
 // list favourites
 const getFavoritesByUser = (db, id) => {
-  //const queryString = `SELECT map_id FROM favorites WHERE user_id = $1;`;
   const queryString = `
   SELECT maps.*
   FROM maps
@@ -134,7 +133,7 @@ const getMapsByPoints = (db, user_id ) => {
   const values = [user_id];
   return db
     .query(queryString, values)
-    .then((result) => result.rows[0])
+    .then((result) => result.rows)
     .catch((err) => null);
 };
 
