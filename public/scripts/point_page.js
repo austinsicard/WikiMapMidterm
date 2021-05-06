@@ -4,20 +4,26 @@ $(() => {
 
 const loadPoint = () => {
   $.ajax('maps/points/1', { method: 'GET' })
-  .then(data => {
-    createPointHTML(data);
-  })
-  .catch(err => {
-    res.send(err);
-  })
-};
+    .then(map => {
+      $.ajax('/users/1', { method: 'GET' }) // get owner's data
+        .then(data => {
+          userName = data.name;
+          createPointHTML(map, userName);
+          return;
+        })
+        .catch(err => {
+          res.send(err)
+        })
+    })
+}
 
-const createPointHTML = (point) => {
+
+const createPointHTML = (point, userName) => {
 
   const title = point.title;
   const description = point.description;
   const photo = point.photo_url;
-  const user = point.user_id;
+  const user = userName;
 
 
   // HTML
@@ -29,9 +35,18 @@ const createPointHTML = (point) => {
         <p class="description">${description}</p>
         <img src=${photo}>
     </div>
+    <form method="GET" action="/editPoint">
+        <button type="submit">Edit point</button>
+    </form>
+    <form method="GET" action="/">
+        <button type="submit">Delete point</button>
+    </form>
     `
   )
 }
+
+
+// for delete button add some effects like alert('Deleted!')
 
 
 // get users name instead of id
