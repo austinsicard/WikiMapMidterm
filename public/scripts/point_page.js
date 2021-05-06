@@ -31,6 +31,7 @@ const createPointHTML = (point) => {
     </div>
     `
   )
+
 }
 
 
