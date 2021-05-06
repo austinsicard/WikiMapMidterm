@@ -43,6 +43,7 @@ const createPointHTML = (point, userName) => {
     </form>
     `
   )
+
 }
 
 

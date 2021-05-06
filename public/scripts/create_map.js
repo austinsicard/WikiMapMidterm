@@ -64,26 +64,24 @@ const createMapHTML = function (map) {
   $('#main-content').prepend(
     ` <p style="margin-top: 4em;
     margin-left: 9em;">Add point to map:</p>
-    <h2 class="h2-createPoint" id="title">${title}</h2>
+    <h2 class="h2-createPoint" id="title">${description}</h2>
 
     <div class="test2">
-    <div class="test1">
+      <div class="test1">
 
-    <form>
+      <form>
         Title:
       <input class="mapid-user"></input>
 
       Description:
       <input class="mapid-p"></input>
-
-      Image:
-      <input></input>
       <button class="button-mapid">Add Point</button>
-
       </form>
-      </div>
-      <div id="map-${mapid}" style="width: 50%; height: 20em; position: relative;">
-    </div>`
+    </div>
+    <div id="map-${mapid}" style="width: 50%; height: 20em; position: relative;">
+
+    </div>
+    `
   );
 
 
