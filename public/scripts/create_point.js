@@ -12,13 +12,13 @@ const loadMap = function () {
     .then(data => {
       console.log("DATAAAA:", data);
       createMapHTML(data);
-  })
+    })
     .catch(err => {
     })
 };
 
 
-const createPointElement = function (point){
+const createPointElement = function (point) {
   let id = point.id
   let lat = point.lat
   let long = point.long
@@ -35,7 +35,7 @@ const createPointElement = function (point){
 // create map with leaflets
 
 const createMapElement = function (mapId, lat, long) {
-   mymap = L.map(`map-${mapId}`).setView([lat, long], 12);
+  mymap = L.map(`map-${mapId}`).setView([lat, long], 2.45);
   L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
@@ -44,8 +44,21 @@ const createMapElement = function (mapId, lat, long) {
     zoomOffset: -1,
     accessToken: 'pk.eyJ1IjoiZHVyYWJpbGxpYW0iLCJhIjoiY2tvYTBtdXQ3Mm1odjJwcXd3MXkycmptcCJ9.NfmIqQQjSypgKHZciDx8rg'
   }).addTo(mymap);
-    //createPointElement(lat, long)
+  //createPointElement(lat, long)
+  let popup = L.popup();
 
+  function onMapClick(e) {
+    let lat = e.latlng.lat;
+    let long = e.latlng.lng;
+    popup
+      .setLatLng(e.latlng)
+      .setContent("You clicked the map at " + e.latlng.toString())
+      .openOn(mymap);
+    $(`#form-val-lat`).val(lat);
+    $(`#form-val-long`).val(long);
+  }
+
+  mymap.on('click', onMapClick);
 
   return mymap;
 }
@@ -70,22 +83,18 @@ const createMapHTML = function (map) {
 
         <div class="form">
 
-          <form method='POST' action="/maps/${mapid}/points">
-            Title:
-            <input name="title"></input>
-            Description:
-            <input name="description"></input>
-            <button type="submit" class="button-mapid">Add Point</button>
-          </form>
 
-        </div>
+      </div>
+      <div id="map-${mapid}" style="width: 50%; height: 20em; position: relative;">
+    </div>
+    <script>
 
+    </script>`
 
-      <div id="map-${mapid}" style="width: 50%; height: 20em; position: relative;"></div>`
   );
 
 
 
   // create map element from leaflets
   createMapElement(mapid, lat, long);
-  }
+}

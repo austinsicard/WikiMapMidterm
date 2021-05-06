@@ -156,7 +156,8 @@ exports.addFavorite = addFavorite;
 
 //Create points
 const addPoint =  (db, {map_id, user_id, title, description, photo_url, lat, long}) => {
-  const queryString = `INSERT INTO points (map_id, user_id, title, description, photo_url, lat, long) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;`;
+
+  const queryString = `INSERT INTO points (map_id, user_id, title, description, photo_url, lat, long) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;`;
   const values = [map_id, user_id, title, description, photo_url, lat, long];
   return db
     .query(queryString, values)
