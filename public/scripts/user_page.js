@@ -36,7 +36,7 @@ const createUserHTML = (user) => {
     `
     <div class="user-btns">
       
-        <form method="GET" action="/create-map">
+        <form method="GET" action="/maps/new">
           <button type="submit">Create map</button>
         </form>
 
