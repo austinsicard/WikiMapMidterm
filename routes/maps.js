@@ -23,15 +23,15 @@ module.exports = (db) => {
       })
   });
 
-  
-  
+
+
   router.get("/new", (req, res) => { //form
     const templateVars = {
       user: req.user
     };
     res.render("createMap", templateVars)
   })
-  
+
 
 
   // create a map
@@ -107,7 +107,7 @@ module.exports = (db) => {
       res.send(err)
     })
   })
-  
+
   // delete a map
   router.post('/:id/delete', (req, res) => {
     const mapId = req.params.id;
@@ -137,7 +137,8 @@ module.exports = (db) => {
   // give the map id
   router.get("/:id/points", (req, res) => { //form
     const templateVars = {
-      user: req.user
+      user: req.user,
+      map_id: req.params.id
     };
     res.render("createPoint", templateVars)
   })
@@ -158,12 +159,18 @@ module.exports = (db) => {
   // add a point
   router.post('/:id/points', (req, res) => {
     const mapId = req.params.id;
-    addPoint(db, mapId)
+    const userId = req.session.user_id; // access session data (like cookie)
+    const pointId = req.body.id;
+    // addMap(db, { ...req.body, user_id: userId })
+    console.log("Req Body:", req.body);
+    // {map_id, user_id, title, description, photo_url, lat, long}
+    addPoint(db, {...req.body, map_id: mapId, user_id: userId})
     .then(result => {
-      res.send(result)
+      // res.send(result)
+      res.redirect(`/point`);
     })
     .catch(err => {
-      res.send(err)
+      res.send(err);
     })
   })
 
