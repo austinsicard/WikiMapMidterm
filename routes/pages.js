@@ -34,13 +34,6 @@ module.exports = (db) => {
     res.render("index", templateVars);
   });
 
-  // router.get("/map", (req, res) => {
-  //   const templateVars = {
-  //     user: req.user
-  //   };
-  //   res.render("mapPage", templateVars)
-  // })
-
   router.get("/user", (req, res) => {
     const templateVars = {
       user: req.user

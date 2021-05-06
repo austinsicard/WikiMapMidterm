@@ -78,7 +78,10 @@ const createMapHTML = function (map) {
 
       Image:
       <input></input>
-      <button class="button-mapid">Add Point</button>
+
+      <form method="GET" action="/maps/${mapid}">
+      <button type="submit">Add Point</button>
+      </form>
 
       </form>
       </div>
