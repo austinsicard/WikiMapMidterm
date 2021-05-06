@@ -8,7 +8,7 @@ let mymap;
 
 // get data from endpoint
 const loadMap = function () {
-  $.ajax(`/maps/${window.location.pathname.split('/')[2]}`, { method: 'GET' }) // mapid is in endpoint
+  $.ajax(`/maps/api/${window.location.pathname.split('/')[2]}`, { method: 'GET' }) // mapid is in endpoint
     .then(data => {
       console.log("DATAAAA:", data);
       createMapHTML(data);
@@ -35,7 +35,7 @@ const createPointElement = function (point){
 // create map with leaflets
 
 const createMapElement = function (mapId, lat, long) {
-   mymap = L.map(`map-${mapId}`).setView([lat, long], 12);
+   mymap = L.map(`map-${mapId}`).setView([lat, long], 2.45);
   L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
@@ -45,7 +45,18 @@ const createMapElement = function (mapId, lat, long) {
     accessToken: 'pk.eyJ1IjoiZHVyYWJpbGxpYW0iLCJhIjoiY2tvYTBtdXQ3Mm1odjJwcXd3MXkycmptcCJ9.NfmIqQQjSypgKHZciDx8rg'
   }).addTo(mymap);
     //createPointElement(lat, long)
+    let popup = L.popup();
 
+    function onMapClick(e) {
+      let lat = e.latlng.lat;
+      let long = e.latlng.lng
+    popup
+        .setLatLng(e.latlng)
+        .setContent("You clicked the map at " + e.latlng.toString())
+        .openOn(mymap);
+     }
+
+     mymap.on('click', onMapClick);
 
   return mymap;
 }
@@ -69,21 +80,14 @@ const createMapHTML = function (map) {
     <div class="test2">
     <div class="test1">
 
-    <form>
-        Title:
-      <input class="mapid-user"></input>
 
-      Description:
-      <input class="mapid-p"></input>
-
-      Image:
-      <input></input>
-      <button class="button-mapid">Add Point</button>
-
-      </form>
       </div>
       <div id="map-${mapid}" style="width: 50%; height: 20em; position: relative;">
-    </div>`
+    </div>
+    <script>
+
+    </script>`
+
   );
 
 

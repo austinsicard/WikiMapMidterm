@@ -22,8 +22,24 @@
 </head>
 <body>
   <%- include('partials/_header') %>
+  <main id="main-content">
 
-    <main id="main-content">
+
+
+    <div class="form">
+
+      <form method='POST' action="/maps/points/:id">
+        Title:
+        <input name="title"></input>
+        Description:
+        <input name="description"></input>
+        Photo If You Like
+        <input name="photo_url"></input>
+        <button class="button-pointid">Add Point</button>
+      </form>
+
+    </div>
+
     </main>
 
 
