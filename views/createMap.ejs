@@ -16,9 +16,25 @@
   <%- include('partials/_header') %>
   <main id="main-content">
 
+
+
+  <div class="form">
+
+    <form method='POST' action="/maps">
+      Title:
+      <input name="title"></input>
+      Description:
+      <input name="description"></input>
+      <button class="button-mapid">Add Map</button>
+    </form>
+
+  </div>
+
+
+
   </main>
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-  <script type="text/javascript" src="/scripts/create_map.js"></script>
+
 </body>
 </html>

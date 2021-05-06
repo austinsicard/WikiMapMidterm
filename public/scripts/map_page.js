@@ -8,7 +8,8 @@ let userName;
 
 // get data from endpoint
 const loadMap = function () {
-  $.ajax('/maps/6', { method: 'GET' }) // get map data
+  $.ajax(`/maps/api/${window.location.pathname.split('/')[2]
+}`, { method: 'GET' }) // get map data
     .then(map => {
       $.ajax('/users/1', { method: 'GET' }) // get owner's data
       .then(data => {
@@ -19,7 +20,7 @@ const loadMap = function () {
       .catch(err => {
         res.send(err)
       });
-      $.ajax('/maps/6/points', { method: 'GET' }) // get points data
+      $.ajax(`/maps/api/${window.location.pathname.split('/')[2]}/points`, { method: 'GET' }) // get points data
        .then(data => {
         renderPoints(data);
        })

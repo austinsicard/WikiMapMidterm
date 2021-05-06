@@ -23,21 +23,23 @@ module.exports = (db) => {
       })
   });
 
-
+  
+  
   router.get("/new", (req, res) => { //form
     const templateVars = {
       user: req.user
     };
     res.render("createMap", templateVars)
   })
+  
 
 
   // create a map
-  router.post('/new', (req, res) => {
-    const userId = req.session.userId; // access session data (like cookie)
-    addMap(db, { ...req.body, owner_id: userId })
+  router.post('/', (req, res) => {
+    const userId = req.session.user_id; // access session data (like cookie)
+    addMap(db, { ...req.body, user_id: userId })
       .then(map => {
-        res.send(map);
+        res.redirect(`/maps/${map.id}/points`);
       })
       .catch((err) => {
         res.send(err)
@@ -45,7 +47,7 @@ module.exports = (db) => {
   })
 
   // individual map
-  router.get('/:id', (req, res) => {
+  router.get('/api/:id', (req, res) => {
     const id = req.params.id;
     console.log(id)
     getMapById(db, id)
@@ -58,6 +60,13 @@ module.exports = (db) => {
       res.send(err);
       })
     })
+
+  router.get("/:id", (req, res) => {
+    const templateVars = {
+      user: req.user // comes from cookie
+    };
+    res.render("mapPage", templateVars)
+  })
 
   // modify a map
   router.post('/:id', (req, res) => {
@@ -125,8 +134,16 @@ module.exports = (db) => {
     })
   })
 
-  // get point by map id
-  router.get('/:id/points', (req, res) => {
+  // give the map id
+  router.get("/:id/points", (req, res) => { //form
+    const templateVars = {
+      user: req.user
+    };
+    res.render("createPoint", templateVars)
+  })
+
+  // get point data by map id
+  router.get('/api/:id/points', (req, res) => {
     const mapId = req.params.id;
     getPointsByMap(db, mapId)
     .then(result => {

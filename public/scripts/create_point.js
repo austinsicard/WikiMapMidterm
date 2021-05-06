@@ -8,7 +8,7 @@ let mymap;
 
 // get data from endpoint
 const loadMap = function () {
-  $.ajax('/maps/6', { method: 'GET' }) // mapid is in endpoint
+  $.ajax(`/maps/${window.location.pathname.split('/')[2]}`, { method: 'GET' }) // mapid is in endpoint
     .then(data => {
       console.log("DATAAAA:", data);
       createMapHTML(data);

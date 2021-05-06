@@ -49,7 +49,6 @@ app.use('/', (req, res, next) => {
   if (req.session.user_id) {
     getUserById(db, req.session.user_id)
       .then(data => {
-        console.log(data);
         req.user = data;
         next();
       })

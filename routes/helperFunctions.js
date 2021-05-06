@@ -231,9 +231,9 @@ const editPoint = (db, options) => {
 exports.editPoint = editPoint;
 
 //Create maps
-const addMap =  (db, {user_id, title, description, photo_url, city, lat, long}) => {
-  const queryString = `INSERT INTO maps (user_id, title, description, photo_url, city, lat, long) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;`;
-  const values = [user_id, title, description, photo_url, city, lat, long];
+const addMap =  (db, {user_id, title, description}) => {
+  const queryString = `INSERT INTO maps (user_id, title, description) VALUES ($1, $2, $3) RETURNING *;`;
+  const values = [user_id, title, description];
   return db
     .query(queryString, values)
     .then((result) => result.rows[0])

@@ -1,21 +1,21 @@
 // pull out the maps from server database
 $(() => {
   console.log('Page loaded, ajax running')
-  loadMap();
+  createMapHTML();
 })
 
 let mymap;
 
 // get data from endpoint
-const loadMap = function () {
-  $.ajax('/maps/6', { method: 'GET' }) // mapid is in endpoint
-    .then(data => {
-      console.log("DATAAAA:", data);
-      createMapHTML(data);
-  })
-    .catch(err => {
-    })
-};
+// const loadMap = function () {
+//   $.ajax('/maps/', { method: 'GET' }) // mapid is in endpoint
+//     .then(data => {
+//       console.log("DATAAAA:", data);
+//       createMapHTML(data);
+//   })
+//     .catch(err => {
+//     })
+// };
 
 
 const createPointElement = function (point){

@@ -34,12 +34,12 @@ module.exports = (db) => {
     res.render("index", templateVars);
   });
 
-  router.get("/map", (req, res) => {
-    const templateVars = {
-      user: req.user
-    };
-    res.render("mapPage", templateVars)
-  })
+  // router.get("/map", (req, res) => {
+  //   const templateVars = {
+  //     user: req.user
+  //   };
+  //   res.render("mapPage", templateVars)
+  // })
 
   router.get("/user", (req, res) => {
     const templateVars = {
@@ -62,12 +62,12 @@ module.exports = (db) => {
   //   res.render("createMap", templateVars)
   // })
 
-  router.get("/create-point", (req, res) => { //form
-    const templateVars = {
-      user: req.user
-    };
-    res.render("createPoint", templateVars)
-  })
+  // router.get("/create-point", (req, res) => { //form
+  //   const templateVars = {
+  //     user: req.user
+  //   };
+  //   res.render("createPoint", templateVars)
+  // })
 
   router.get("/favorites", (req, res) => {
     const templateVars = {
