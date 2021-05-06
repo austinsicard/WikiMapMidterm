@@ -21,7 +21,8 @@ const createUserHTML = (user) => {
   // HTML 
   // give: picture, name, email
   $('#main-content').prepend(
-    `<div class="user">
+    `<span id="greeting"> Hello, ${user.name}!>
+    <div class="user">
       <span>${name}</span>
       <img src=${photo}>
         <div class="info">
@@ -30,9 +31,6 @@ const createUserHTML = (user) => {
         </div>
     </div>`
   );
-
-  // if user id(from session) === user profile id
-  // its 'own profile
 
   $('#main-content').append(
     `
@@ -58,16 +56,17 @@ const createUserHTML = (user) => {
     `
   );
 
+  // if user id(from session) === user profile id
+  // its 'own profile
   // give: create map, my maps, my points, my favourites
+
+
+  //STRETCH
 
   // if user !== user profile id
   // it's somebody elses profile
-
   // give: user's maps, user's point
 
-
-
-  // add filters for links  'favourites', 'my maps', 'my points' buttons 
   
 }
 
