@@ -11,7 +11,7 @@ const loadMap = function () {
   $.ajax(`/maps/api/${window.location.pathname.split('/')[2]
 }`, { method: 'GET' }) // get map data
     .then(map => {
-      $.ajax('/users/1', { method: 'GET' }) // get owner's data
+      $.ajax(`/users/${map.user_id}`, { method: 'GET' }) // get owner's data
       .then(data => {
         userName = data.name;
         createMapHTML(map, userName);
@@ -89,7 +89,7 @@ const createMapHTML = function (map, userName) {
           <button id="fav-btn" type="button">Add to Favorites</button>
         </form>
         <form>
-          <a href="maps/${mapid}/points"> <button id="Add point" type="button">Add point</button> </a>
+          <a href="/maps/${mapid}/points"> <button id="Add point" type="button">Add point</button> </a>
         </form>
 
       </div>
@@ -109,22 +109,24 @@ $('#fav-btn').click(function() {
 })
 
 
-  // $('#fav-btn').click(function(event) {
-  //   event.preventDefault();
-  //   $.ajax({
-  //     type: "POST",
-  //     url: `/${mapid}/favorites`,
-  //     data: {
-  //       id: $(this).val(),
-  //     },
-  //     success: function (result) {
-  //       alert('ok');
-  //     },
-  //     error: function (result) {
-  //       alert('error');
-  //     }
-  //   });
-  // });
+  $('#fav-btn').click(function(event) {
+    event.preventDefault();
+    $.ajax({
+      type: "POST",
+      url: `/maps/${mapid}/favorites`,
+      data: {
+        id: $(this).val(),
+      },
+      success: function (result) {
+        console.log(data)
+          $(this).css('background-color', '#E3E2B7')
+          $(this).html('Added to Favorites')
+      },
+      error: function (result) {
+        alert('error');
+      }
+    });
+  });
 
 
 };

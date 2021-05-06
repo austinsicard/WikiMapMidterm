@@ -145,7 +145,10 @@ const addFavorite =  (db, map_id, user_id) => {
   const values = [map_id, user_id];
   return db
     .query(queryString, values)
-    .then((result) => result.rows[0])
+    .then((result) => {
+      console.log('FRom helper function: ' + result)
+      return result.rows[0]
+    })
     .catch((err) => err.message);
 };
 

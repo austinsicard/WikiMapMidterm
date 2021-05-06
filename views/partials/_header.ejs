@@ -7,7 +7,9 @@
   <!-- NAV BUTTONS -->
 
   <form method="GET" action="/maps">
-    <p type="button" id="logo" >WikiMaps</p>
+    <a href="/">
+      <p id="logo">WikiMaps</p>
+    </a>
   </form>
 
   
@@ -16,7 +18,7 @@
     <% if (!user) { %>
 
   <form method="GET" action="/register">
-    <button type="button" class="btn btn-outline-primary">Register</button>
+    <button type="button" class="btn btn-outline-primary">Sign up</button>
   </form>
 
   <form method="GET" action="/login">
@@ -30,6 +32,7 @@
         <button class="btn btn-outline-primary">Logout</button>
       </form>
       <a class="btn btn-primary" href="/maps/new">Create new map</a>
+      <a class="btn btn-primary" href="/users/<%=user.id%>" >My profile</a>
 
     <% } %>
 </div>

@@ -39,7 +39,7 @@ module.exports = (db) => {
     const userId = req.session.user_id; // access session data (like cookie)
     addMap(db, { ...req.body, user_id: userId })
       .then(map => {
-        res.redirect(`/maps/${map.id}/points`);
+        res.redirect(`maps/${map.id}/points`);
       })
       .catch((err) => {
         res.send(err)
@@ -160,9 +160,11 @@ module.exports = (db) => {
     const mapId = req.params.id;
     addPoint(db, mapId)
     .then(result => {
-      res.send(result)
+      console.log('Created a map, redirecting now')
+      res.redirect(`/maps/${mapId}`);
     })
     .catch(err => {
+      console.log('didnt create a point, no redirect')
       res.send(err)
     })
   })

@@ -8,7 +8,7 @@ let mymap;
 
 // get data from endpoint
 const loadMap = function () {
-  $.ajax(`/maps/${window.location.pathname.split('/')[2]}`, { method: 'GET' }) // mapid is in endpoint
+  $.ajax(`/maps/api/${window.location.pathname.split('/')[2]}`, { method: 'GET' }) // mapid is in endpoint
     .then(data => {
       console.log("DATAAAA:", data);
       createMapHTML(data);
@@ -58,35 +58,30 @@ const createMapHTML = function (map) {
   const description = map.description;
   const lat = map.lat;
   const long = map.long;
-  const mapid = map.id
+  const mapid = map.id;
+  console.log(mapid)
 
   // HTML for a map container
   $('#main-content').prepend(
     ` <p style="margin-top: 4em;
     margin-left: 9em;">Add point to map:</p>
+
     <h2 class="h2-createPoint" id="title">${title}</h2>
 
-    <div class="test2">
-    <div class="test1">
+        <div class="form">
 
-    <form>
-        Title:
-      <input class="mapid-user"></input>
+          <form method='POST' action="/maps/${mapid}/points">
+            Title:
+            <input name="title"></input>
+            Description:
+            <input name="description"></input>
+            <button type="submit" class="button-mapid">Add Point</button>
+          </form>
 
-      Description:
-      <input class="mapid-p"></input>
+        </div>
 
-      Image:
-      <input></input>
 
-      <form method="GET" action="/maps/${mapid}">
-      <button type="submit">Add Point</button>
-      </form>
-
-      </form>
-      </div>
-      <div id="map-${mapid}" style="width: 50%; height: 20em; position: relative;">
-    </div>`
+      <div id="map-${mapid}" style="width: 50%; height: 20em; position: relative;"></div>`
   );
 
 

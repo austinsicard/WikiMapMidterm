@@ -48,20 +48,6 @@ module.exports = (db) => {
     res.render("pointPage", templateVars)
   })
 
-  // router.get("/create-map", (req, res) => { //form
-  //   const templateVars = {
-  //     user: req.user
-  //   };
-  //   res.render("createMap", templateVars)
-  // })
-
-  // router.get("/create-point", (req, res) => { //form
-  //   const templateVars = {
-  //     user: req.user
-  //   };
-  //   res.render("createPoint", templateVars)
-  // })
-
   router.get("/favorites", (req, res) => {
     const templateVars = {
       user: req.user

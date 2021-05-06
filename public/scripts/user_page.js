@@ -3,7 +3,7 @@ $(() => {
 })
 
 const loadUser = () => {
-  $.ajax('users/3', { method: 'GET' })
+  $.ajax(`/users/api/${window.location.pathname.split('/')[2]}`, { method: 'GET' })
   .then(data => {
     createUserHTML(data);
   })

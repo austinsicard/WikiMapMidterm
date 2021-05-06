@@ -15,6 +15,13 @@ module.exports = (db) => {
 
   // user profile
   router.get('/:id', (req, res) => {
+    const templateVars = {
+      user: req.user // comes from cookie
+    };
+    res.render("userPage", templateVars)
+  })
+
+  router.get('/api/:id', (req, res) => {
     const id = req.params.id;
     getUserById(db, id)
       .then(data => {

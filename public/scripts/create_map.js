@@ -18,7 +18,7 @@ let mymap;
 // };
 
 
-const createPointElement = function (point){
+const createPointElement = function (point) {
   let id = point.id
   let lat = point.lat
   let long = point.long
@@ -35,7 +35,7 @@ const createPointElement = function (point){
 // create map with leaflets
 
 const createMapElement = function (mapId, lat, long) {
-   mymap = L.map(`map-${mapId}`).setView([lat, long], 12);
+   mymap = L.map(`map-${mapId}`).setView([lat, long], 2);
   L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
@@ -44,7 +44,6 @@ const createMapElement = function (mapId, lat, long) {
     zoomOffset: -1,
     accessToken: 'pk.eyJ1IjoiZHVyYWJpbGxpYW0iLCJhIjoiY2tvYTBtdXQ3Mm1odjJwcXd3MXkycmptcCJ9.NfmIqQQjSypgKHZciDx8rg'
   }).addTo(mymap);
-    //createPointElement(lat, long)
 
 
   return mymap;
@@ -62,24 +61,8 @@ const createMapHTML = function (map) {
 
   // HTML for a map container
   $('#main-content').prepend(
-    ` <p style="margin-top: 4em;
-    margin-left: 9em;">Add point to map:</p>
-    <h2 class="h2-createPoint" id="title">${description}</h2>
-
-    <div class="test2">
-      <div class="test1">
-
-      <form>
-        Title:
-      <input class="mapid-user"></input>
-
-      Description:
-      <input class="mapid-p"></input>
-      <button class="button-mapid">Add Point</button>
-      </form>
-    </div>
-    <div id="map-${mapid}" style="width: 50%; height: 20em; position: relative;">
-
+    
+    `<div id="map-${mapid}" style="width: 50%; height: 20em; position: relative;">
     </div>
     `
   );
