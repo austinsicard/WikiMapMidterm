@@ -52,7 +52,7 @@ const createMapHTML = function (map) {
       <div class="div-container">
         <main class="index-main">
           < section class= mainmap >
-            <a href="/maps/${mapid}"> ${title} </a>
+            <a href="/map"> ${title} </a>
             <p>${description}</p>
             <div id="map-${mapid}" style="width: 100%; height: 20em; position: relative;"></div>
           </section >
