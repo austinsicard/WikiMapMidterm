@@ -23,8 +23,17 @@ module.exports = (db) => {
       })
   });
 
+
+  router.get("/new", (req, res) => { //form
+    const templateVars = {
+      user: req.user
+    };
+    res.render("createMap", templateVars)
+  })
+
+
   // create a map
-  router.post('/', (req, res) => {
+  router.post('/new', (req, res) => {
     const userId = req.session.userId; // access session data (like cookie)
     addMap(db, { ...req.body, owner_id: userId })
       .then(map => {

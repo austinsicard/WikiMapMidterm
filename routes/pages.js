@@ -15,40 +15,79 @@ const { getUserById, getMapsByUser, getFavoritesByUser, getMapsByPoints, getUser
 
 module.exports = (db) => {
 
+
+  router.get("/loginTest/:id", (req, res) => {
+    req.session.user_id = req.params.id;
+    res.redirect('/')
+  })
+
+  router.post('/logout', (req, res) => {
+    req.session.user_id = null;
+    res.redirect('/');
+  })
+
   router.get("/", (req, res) => {
-    res.render("index");
+    console.log(req.user)
+    const templateVars = {
+      user: req.user
+    };
+    res.render("index", templateVars);
   });
 
   router.get("/map", (req, res) => {
-    res.render("mapPage")
+    const templateVars = {
+      user: req.user
+    };
+    res.render("mapPage", templateVars)
   })
 
   router.get("/user", (req, res) => {
-    res.render("userPage")
+    const templateVars = {
+      user: req.user
+    };
+    res.render("userPage", templateVars)
   })
 
   router.get("/point", (req, res) => {
-    res.render("pointPage")
+    const templateVars = {
+      user: req.user
+    };
+    res.render("pointPage", templateVars)
   })
 
-  router.get("/create-map", (req, res) => { //form
-    res.render("createMap")
-  })
+  // router.get("/create-map", (req, res) => { //form
+  //   const templateVars = {
+  //     user: req.user
+  //   };
+  //   res.render("createMap", templateVars)
+  // })
 
   router.get("/create-point", (req, res) => { //form
-    res.render("createPoint")
+    const templateVars = {
+      user: req.user
+    };
+    res.render("createPoint", templateVars)
   })
 
   router.get("/favorites", (req, res) => {
-    res.render("favorites")
+    const templateVars = {
+      user: req.user
+    };
+    res.render("favorites", templateVars)
   })
 
   router.get("/user-maps", (req, res) => {
-    res.render("userMaps")
+    const templateVars = {
+      user: req.user
+    };
+    res.render("userMaps", templateVars)
   })
 
   router.get("/user-points", (req, res) => {
-    res.render("userPoints")
+    const templateVars = {
+      user: req.user
+    };
+    res.render("userPoints", templateVars)
   })
 
 

@@ -10,8 +10,11 @@
     <p type="button" id="logo" >WikiMaps</p>
   </form>
 
-
+  
   <div class="right-btns">
+    
+    <% if (!user) { %>
+
   <form method="GET" action="/register">
     <button type="button" class="btn btn-outline-primary">Register</button>
   </form>
@@ -19,6 +22,18 @@
   <form method="GET" action="/login">
     <button type="button" class="btn btn-outline-primary">Login</button>
   </form>
+
+  <% } else { %>
+      
+    <p> Logged in as <%= user.name %></p>
+      <form method="POST" action="/logout">
+        <button class="btn btn-outline-primary">Logout</button>
+      </form>
+      <a class="btn btn-primary" href="/maps/new">Create new map</a>
+
+    <% } %>
 </div>
+
+
 
 </header>
