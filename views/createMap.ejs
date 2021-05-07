@@ -8,7 +8,7 @@
 
 
   <link rel="stylesheet" href="/styles/header.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/mapid.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/createMap.css" type="text/css" />
 
 
 </head>
@@ -20,12 +20,14 @@
 
   <div class="form">
 
-    <form method='POST' action="/maps">
+    <form class="createMap-form" method='POST' action="/maps">
       Title:
-      <input name="title"></input>
+      <input name="title" style="width: 25em;"></input>
       Description:
-      <input name="description"></input>
-      <button class="button-mapid">Add Map</button>
+      <input name="description" style="padding: 6em;
+      width: 25em;;"></input>
+      <button style="margin-top: 2em;
+      width: 50%;" class="button-mapid">Add Map</button>
     </form>
 
   </div>

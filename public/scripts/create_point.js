@@ -72,11 +72,14 @@ const createMapHTML = function (map) {
   // HTML for a map container
   $('#main-content').prepend(
 
-    `<p style="margin-top: 4em; margin-left: 9em;">Add point to map:</p>
+    `
+    <h2 class="createPoint-h2" id="title">${title}</h2>
 
-    <h2 class="h2-createPoint" id="title">${title}</h2>
+    <p class="createPoint-p">Add point to map:</p>
 
-    <div id="map-${mapid}" style="width: 50%; height: 20em; position: relative;"></div>`
+    <div id="map-${mapid}" style="width: 50em; height: 30em; position: relative;"></div>
+
+    `
 
   );
 
