@@ -8,7 +8,6 @@
   display:flex;
   justify-content: center;
   margin-top: 2em;
-  border:2px solid black;
 }
 
 .test2 {
@@ -20,12 +19,13 @@
 .mapid {
   width: 30em;
   height: 25em;
-  background-color: black;
-  border: 2px solid black;
   align-items: baseline;
 }
 
 .h2-createPoint {
   display: flex;
   margin-left: 6em;
+}
+#main-content {
+  background-color: #F5F0E4;
 }

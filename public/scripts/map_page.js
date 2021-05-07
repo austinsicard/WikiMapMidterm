@@ -11,7 +11,7 @@ const loadMap = function () {
   $.ajax(`/maps/api/${window.location.pathname.split('/')[2]
 }`, { method: 'GET' }) // get map data
     .then(map => {
-      $.ajax(`/users/${map.user_id}`, { method: 'GET' }) // get owner's data
+      $.ajax(`/users/api/${map.user_id}`, { method: 'GET' }) // get owner's data
       .then(data => {
         userName = data.name;
         createMapHTML(map, userName);
@@ -94,7 +94,7 @@ const createMapHTML = function (map, userName) {
 
       </div>
       <section class=mainmap>
-        <div id="map-${mapid}" style="width: 100%; height: 20em; position: relative;">
+        <div id="map-${mapid}" style="width: 100%; height: 50em; position: relative;">
         </div>
       </section>`
   );
