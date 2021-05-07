@@ -48,7 +48,7 @@ const createPointElement = function (point){
   let title = point.title
   let description = point.description
   let pic = point.photo_url
-  let popupinfo = `<div style = display: flex; flex-direction: column; align-items: center;><b>${title}</b><br><img src=${pic} style=width:50px;height:60px;><br>${description}</div>`
+  let popupinfo = `<div style = display: flex; flex-direction: column; align-items: center;><a href="/maps/${id}/point"><b>${title}</b></a><br><img src=${pic} style=width:50px;height:60px;><br>${description}</div>`
   marker = L.marker([lat, long]).addTo(mymap);
   marker.bindPopup(popupinfo);
   popup = L.popup();
