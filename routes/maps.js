@@ -154,11 +154,15 @@ module.exports = (db) => {
 
   // add a point
   router.post('/:id/points/add', (req, res) => {
+    console.log('Redirected to the correct router')
     const mapId = req.params.id;
-    const userId = req.session.user_id; // access session data
+    const userId = req.session.user_id;
+    console.log('Req.body: ', req.body)
+    console.log('User id: ', req.session) // access session data
     addPoint(db, {...req.body, map_id: mapId, user_id: userId})
-    .then(result => {
-      res.redirect(`/maps/${result.id}/point`);
+    .then(newPoint => {
+      console.log('Redirect to the point page should be now. newPoint: ', newPoint)
+      res.redirect(`/maps/${newPoint.id}/point`);
     })
     .catch(err => {
       res.send(err);
@@ -168,7 +172,8 @@ module.exports = (db) => {
   // render point page
   router.get("/:id/point", (req, res) => {
     const templateVars = {
-      user: req.user
+      user: req.user,
+      pointId: req.params.id
     };
     res.render("pointPage", templateVars)
   })

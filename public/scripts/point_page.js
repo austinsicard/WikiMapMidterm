@@ -2,13 +2,16 @@ $(() => {
   loadPoint();
 })
 
+
 const loadPoint = () => {
   $.ajax(`/maps/points/${window.location.pathname.split('/')[2]}`, { method: 'GET' })
-    .then(map => {
-      $.ajax(`/users/api/${map.user_id}`, { method: 'GET' }) // get owner's data
-        .then(data => {
-          userName = data.name;
-          createPointHTML(map, userName);
+    .then(point => {
+      console.log('Supposed to be a point: ', point)
+      $.ajax(`/users/api/${point.user_id}`, { method: 'GET' }) // get owner's data
+        .then(user => {
+          console.log(user)
+          userName = user.name;
+          createPointHTML(point, userName);
           return;
         })
         .catch(err => {
