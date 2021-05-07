@@ -1,22 +1,9 @@
 // pull out the maps from server database
 $(() => {
-  console.log('Page loaded, ajax running')
   createMapHTML();
 })
 
 let mymap;
-
-// get data from endpoint
-// const loadMap = function () {
-//   $.ajax('/maps/', { method: 'GET' }) // mapid is in endpoint
-//     .then(data => {
-//       console.log("DATAAAA:", data);
-//       createMapHTML(data);
-//   })
-//     .catch(err => {
-//     })
-// };
-
 
 const createPointElement = function (point) {
   let id = point.id
@@ -51,10 +38,6 @@ const createMapElement = function (mapId, lat, long) {
 
 //create new map container
 const createMapHTML = function (map) {
-  console.log("createMAPHTML:", map)
-  const user = map.user_id
-  const title = map.title;
-  const description = map.description;
   const lat = map.lat;
   const long = map.long;
   const mapid = map.id

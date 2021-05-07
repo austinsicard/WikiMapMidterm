@@ -1,6 +1,5 @@
 // pull out the maps from server database
 $(() => {
-  console.log('Page loaded, ajax running')
   loadMap();
 })
 
@@ -10,10 +9,10 @@ let mymap;
 const loadMap = function () {
   $.ajax(`/maps/api/${window.location.pathname.split('/')[2]}`, { method: 'GET' }) // mapid is in endpoint
     .then(data => {
-      console.log("DATAAAA:", data);
       createMapHTML(data);
     })
     .catch(err => {
+      res.send(err)
     })
 };
 
@@ -44,7 +43,6 @@ const createMapElement = function (mapId, lat, long) {
     zoomOffset: -1,
     accessToken: 'pk.eyJ1IjoiZHVyYWJpbGxpYW0iLCJhIjoiY2tvYTBtdXQ3Mm1odjJwcXd3MXkycmptcCJ9.NfmIqQQjSypgKHZciDx8rg'
   }).addTo(mymap);
-  //createPointElement(lat, long)
   let popup = L.popup();
 
   function onMapClick(e) {
@@ -65,31 +63,20 @@ const createMapElement = function (mapId, lat, long) {
 
 //create new map container
 const createMapHTML = function (map) {
-  console.log("createMAPHTML:", map)
-  const user = map.user_id
   const title = map.title;
-  const description = map.description;
   const lat = map.lat;
   const long = map.long;
   const mapid = map.id;
-  console.log(mapid)
+
 
   // HTML for a map container
   $('#main-content').prepend(
-    ` <p style="margin-top: 4em;
-    margin-left: 9em;">Add point to map:</p>
+
+    `<p style="margin-top: 4em; margin-left: 9em;">Add point to map:</p>
 
     <h2 class="h2-createPoint" id="title">${title}</h2>
 
-        <div class="form">
-
-
-      </div>
-      <div id="map-${mapid}" style="width: 50%; height: 20em; position: relative;">
-    </div>
-    <script>
-
-    </script>`
+    <div id="map-${mapid}" style="width: 50%; height: 20em; position: relative;"></div>`
 
   );
 

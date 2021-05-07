@@ -3,32 +3,37 @@ $(() => {
 })
 
 const loadContributions = () => {
-  $.ajax('users/3/maps/points', { method: 'GET' })
-    .then(data => {
-      if (!data[0]) {
+  $.ajax(`/users/api/${window.location.pathname.split('/')[2]}/maps/points`, { method: 'GET' })
+    .then(maps => {
+      if (!maps[0]) {
         $('#main-content').prepend(
         `<div class='title'>
           <span class="heading">
-            Maps USER did not contribute to any map yet :(
+            User did not contribute to any map yet :(
           </span>
         </div>`)
         return;
       }
-      renderMaps(data);
-    })
-    .catch(err => {
-      res.send(err)
-    })
+      $.ajax(`/users/api/${maps[0].user_id}`, { method: 'GET' }) // get owner's data
+        .then(data => {
+          userName = data.name;
+          renderMaps(maps, userName);
+          return;
+        })
+        .catch(err => {
+          res.send(err)
+        })
+      })
 }
 
-const renderMaps = function (data) {
-  for (let map of data) {
-    createMapHTML(map);
+const renderMaps = function (maps, userName) {
+  for (let map of maps) {
+    createMapHTML(map, userName);
   }
 }
 
 //create new map container
-const createMapHTML = function (map) {
+const createMapHTML = function (map, userName) {
   const title = map.title;
   const description = map.description;
   const lat = map.lat;
@@ -39,7 +44,7 @@ const createMapHTML = function (map) {
   $('#main-content').prepend(
     `<div class='title'>
         <span class="heading">
-          Maps USER contributed to:
+          Maps ${userName} contributed to:
         </span>
         <p class="par"> Explore the world with the most popular maps among Wikimaps users in may 2021 </p>
       </div>
