@@ -86,12 +86,12 @@ const createMapHTML = function (map, userName) {
         <p class="mapid-p">${description}</p>
 
         <form>
-          <button id="fav-btn" type="button">Add to Favorites</button>
+        <button type="button" class="btn btn-outline-dark" id="fav-btn">Add to Favorites</button>
         </form>
 
         <form>
-          <a href="/maps/${mapid}/points"> <button id="Add point" type="button">Add point</button> </a>
-        </form> 
+          <a href="/maps/${mapid}/points"><button type="button" class="btn btn-outline-dark" id="Add point">Add point</button> </a>
+        </form>
 
       </div>
       <section class=mainmap>
