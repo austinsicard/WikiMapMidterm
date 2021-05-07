@@ -3,23 +3,29 @@ $(() => {
 })
 
 const loadUserMaps = () => {
-  $.ajax('users/3/maps', { method: 'GET' })
-    .then(data => {
-      renderMaps(data);
-    })
-    .catch(err => {
-      res.send(err)
+  $.ajax(`/users/api/${window.location.pathname.split('/')[2]}/maps`, { method: 'GET' })
+    .then(maps => {
+      $.ajax(`/users/api/${maps[0].user_id}`, { method: 'GET' }) // get owner's data
+        .then(data => {
+          userName = data.name;
+          console.log(userName)
+          renderMaps(maps, userName);
+          return;
+        })
+        .catch(err => {
+          res.send(err)
+        })
     })
 }
 
-const renderMaps = function (data) {
+const renderMaps = function (data, userName) {
   for (let map of data) {
-    createMapHTML(map);
+    createMapHTML(map, userName);
   }
 }
 
 //create new map container
-const createMapHTML = function (map) {
+const createMapHTML = function (map, userName) {
   const title = map.title;
   const description = map.description;
   const lat = map.lat;
@@ -30,7 +36,7 @@ const createMapHTML = function (map) {
   $('#main-content').prepend(
     `<div class='title'>
         <span class="heading">
-          Maps created by USER
+          Maps created by ${userName}
         </span>
         <p class="par"> Explore the world with the most popular maps among Wikimaps users in may 2021 </p>
       </div>

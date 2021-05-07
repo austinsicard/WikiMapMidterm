@@ -49,14 +49,11 @@ module.exports = (db) => {
   // individual map
   router.get('/api/:id', (req, res) => {
     const id = req.params.id;
-    console.log(id)
     getMapById(db, id)
       .then(data => {
-        console.log('Data from function: ' + data)
         res.send(data);
       })
       .catch(err => {
-      console.log(err);
       res.send(err);
       })
     })
@@ -84,7 +81,7 @@ module.exports = (db) => {
 
   // add to favorites
   router.post('/:id/favorites', (req, res) => {
-    const userId = req.session.userId; // access session data
+    const userId = req.user.id; // access session data
     const mapId = req.params.id;
     addFavorite(db, mapId, userId) // returns a new 'favourites' table
       .then(result => {
@@ -143,12 +140,11 @@ module.exports = (db) => {
     res.render("createPoint", templateVars)
   })
 
-  // get point data by map id
+  // get point by map id
   router.get('/api/:id/points', (req, res) => {
     const mapId = req.params.id;
     getPointsByMap(db, mapId)
     .then(result => {
-        console.log(result)
         res.send(result);
       })
       .catch(err => {
@@ -157,17 +153,24 @@ module.exports = (db) => {
   })
 
   // add a point
-  router.post('/:id/points', (req, res) => {
+  router.post('/:id/points/add', (req, res) => {
     const mapId = req.params.id;
-    const userId = req.session.user_id; // access session data (like cookie)
-    const pointId = req.body.id;
+    const userId = req.session.user_id; // access session data
     addPoint(db, {...req.body, map_id: mapId, user_id: userId})
     .then(result => {
-      res.redirect(`/point`);
+      res.redirect(`/maps/${result.id}/point`);
     })
     .catch(err => {
       res.send(err);
     })
+  })
+
+  // render point page
+  router.get("/:id/point", (req, res) => {
+    const templateVars = {
+      user: req.user
+    };
+    res.render("pointPage", templateVars)
   })
 
   // delete a point

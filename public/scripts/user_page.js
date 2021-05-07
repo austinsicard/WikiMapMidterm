@@ -13,7 +13,7 @@ const loadUser = () => {
 };
 
 const createUserHTML = (user) => {
-  console.log(user);
+  const id = user.id;
   const name = user.name;
   const email = user.email;
   const photo = user.photo_url;
@@ -40,15 +40,15 @@ const createUserHTML = (user) => {
           <button type="submit">Create map</button>
         </form>
 
-        <form method="GET" action="/user-maps">
+        <form method="GET" action="/users/${id}/maps">
           <button type="submit">My maps</button>
         </form>
 
-        <form method="GET" action="/user-points">
+        <form method="GET" action="/users/${id}/maps/points">
           <button type="submit">My points</button>
         </form>
 
-        <form method="GET" action="/favorites">
+        <form method="GET" action="/users/${id}/favorites">
           <button type="submit">My favorites</button>
         </form>
 

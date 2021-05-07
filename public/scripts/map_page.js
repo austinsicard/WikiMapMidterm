@@ -8,11 +8,11 @@ let userName;
 
 // get data from endpoint
 const loadMap = function () {
-  $.ajax(`/maps/api/${window.location.pathname.split('/')[2]
-}`, { method: 'GET' }) // get map data
+  $.ajax(`/maps/api/${window.location.pathname.split('/')[2]}`, { method: 'GET' }) // get map data
     .then(map => {
       $.ajax(`/users/api/${map.user_id}`, { method: 'GET' }) // get owner's data
       .then(data => {
+
         userName = data.name;
         createMapHTML(map, userName);
         return;
@@ -82,15 +82,16 @@ const createMapHTML = function (map, userName) {
   $('#main-content').prepend(
     `<h2 class="mapid-h2" id="title">${title}</h2>
      <div class="test1">
-        <p class="mapid-user">Map created by to: ${user}</p>
+        <p class="mapid-user">Map created by: ${user}</p>
         <p class="mapid-p">${description}</p>
 
         <form>
           <button id="fav-btn" type="button">Add to Favorites</button>
         </form>
+
         <form>
           <a href="/maps/${mapid}/points"> <button id="Add point" type="button">Add point</button> </a>
-        </form>
+        </form> 
 
       </div>
       <section class=mainmap>
@@ -103,13 +104,13 @@ const createMapHTML = function (map, userName) {
   createMapElement(mapid, lat, long);
 
 
-$('#fav-btn').click(function() {
-  $(this).css('background-color', '#E3E2B7')
-  $(this).html('Added to Favorites')
-})
+// $('#fav-btn').click(function() {
+//   $(this).css('background-color', '#E3E2B7')
+//   $(this).html('Added to Favorites')
+// })
 
 
-  $('#fav-btn').click(function(event) {
+    $('#fav-btn').click(function(event) {
     event.preventDefault();
     $.ajax({
       type: "POST",
@@ -118,9 +119,8 @@ $('#fav-btn').click(function() {
         id: $(this).val(),
       },
       success: function (result) {
-        console.log(data)
-          $(this).css('background-color', '#E3E2B7')
-          $(this).html('Added to Favorites')
+        $('#fav-btn').css('background-color', '#E3E2B7')
+        $('#fav-btn').html('Added to Favorites')
       },
       error: function (result) {
         alert('error');

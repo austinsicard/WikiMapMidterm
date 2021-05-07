@@ -3,9 +3,8 @@ $(() => {
 })
 
 const loadFavorites = () => {
-  $.ajax('users/3/favorites', { method: 'GET' })
+  $.ajax(`/users/api/${window.location.pathname.split('/')[2]}/favorites`, { method: 'GET' })
   .then(data => {
-    console.log('Got the favorites: ' + data)
     renderFavorites(data);
   })
   .catch(err => {

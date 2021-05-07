@@ -27,7 +27,6 @@ module.exports = (db) => {
   })
 
   router.get("/", (req, res) => {
-    console.log(req.user)
     const templateVars = {
       user: req.user
     };
@@ -41,33 +40,12 @@ module.exports = (db) => {
     res.render("userPage", templateVars)
   })
 
-  router.get("/point", (req, res) => {
-    const templateVars = {
-      user: req.user
-    };
-    res.render("pointPage", templateVars)
-  })
-
-  router.get("/favorites", (req, res) => {
-    const templateVars = {
-      user: req.user
-    };
-    res.render("favorites", templateVars)
-  })
-
-  router.get("/user-maps", (req, res) => {
-    const templateVars = {
-      user: req.user
-    };
-    res.render("userMaps", templateVars)
-  })
-
-  router.get("/user-points", (req, res) => {
-    const templateVars = {
-      user: req.user
-    };
-    res.render("userPoints", templateVars)
-  })
+  // router.get("/user-points", (req, res) => {
+  //   const templateVars = {
+  //     user: req.user
+  //   };
+  //   res.render("userPoints", templateVars)
+  // })
 
 
 

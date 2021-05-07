@@ -141,12 +141,11 @@ exports.getMapsByPoints = getMapsByPoints;
 
 //Add to favorites
 const addFavorite =  (db, map_id, user_id) => {
-  const queryString = `INSERT INTO favorites (map_id, user_id VALUES ($1, $2) RETURNING *;`;
+  const queryString = `INSERT INTO favorites (map_id, user_id) VALUES ($1, $2) RETURNING *;`;
   const values = [map_id, user_id];
   return db
     .query(queryString, values)
     .then((result) => {
-      console.log('FRom helper function: ' + result)
       return result.rows[0]
     })
     .catch((err) => err.message);

@@ -28,13 +28,12 @@ module.exports = (db) => {
         res.send(data)
       })
       .catch(err => {
-        console.log(err);
         res.send(err);
       })
   })
 
   // list user's map
-  router.get('/:userId/maps', (req, res) => {
+  router.get('/api/:userId/maps', (req, res) => {
     //const userId = req.session.userId;
     const userId = req.params.userId;
     getMapsByUser(db, userId)
@@ -47,12 +46,27 @@ module.exports = (db) => {
       })
   });
 
+  router.get("/:userId/maps", (req, res) => {
+    const templateVars = {
+      user: req.user
+    };
+    res.render("userMaps", templateVars)
+  })
+
+
   // list favorites
   router.get('/:id/favorites', (req, res) => {
+    const templateVars = {
+      user: req.user
+    };
+    res.render("favorites", templateVars)
+  })
+
+
+  router.get('/api/:id/favorites', (req, res) => {
     const userId = req.params.id;
     getFavoritesByUser(db, userId)
       .then(data => {
-        console.log('Router works: ' + data)
         res.send(data);
       })
       .catch(err => {
@@ -60,8 +74,9 @@ module.exports = (db) => {
       })
   })
 
+
   // get maps by user's points => maps, user contributed to
-  router.get('/:userId/maps/points', (req,res) => {
+  router.get('/api/:userId/maps/points', (req,res) => {
     const userId = req.params.userId;
     getMapsByPoints(db, userId)
     .then(data => {
@@ -70,6 +85,13 @@ module.exports = (db) => {
     .catch(err => {
       res.send(err)
     })
+  })
+
+  router.get("/:userId/maps/points", (req, res) => {
+    const templateVars = {
+      user: req.user
+    };
+    res.render("userPoints", templateVars)
   })
 
 

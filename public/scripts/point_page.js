@@ -3,9 +3,9 @@ $(() => {
 })
 
 const loadPoint = () => {
-  $.ajax('maps/points/1', { method: 'GET' })
+  $.ajax(`/maps/points/${window.location.pathname.split('/')[2]}`, { method: 'GET' })
     .then(map => {
-      $.ajax('/users/1', { method: 'GET' }) // get owner's data
+      $.ajax(`/users/api/${map.user_id}`, { method: 'GET' }) // get owner's data
         .then(data => {
           userName = data.name;
           createPointHTML(map, userName);
