@@ -43,20 +43,13 @@ const createMapHTML = function (map) {
 
   // HTML for a map container
   $('#main-content').prepend(
-     `<div class='title'>
-        <span class="heading">
-          Maps of the month
-        </span>
-        <p class="par"> Explore the world with the most popular maps among Wikimaps users in may 2021 </p>
-      </div>
+     `
       <div class="div-container">
-        <main class="index-main">
-          < section class= mainmap >
+          <section class="mainmap">
             <a href="/maps/${mapid}"> ${title} </a>
             <p>${description}</p>
-            <div id="map-${mapid}" style="width: 100%; height: 20em; position: relative;"></div>
-          </section >
-        </main>
+            <div id="map-${mapid}" style="width: 30em; height: 20em; position: relative;"></div>
+          </section>
       </div>`
   );
 

@@ -4,7 +4,6 @@
   width: 65em;
   height: 50em;
   align-content: space-between;
-  background-color: #F5F0E4;
   text-align: center;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -30,5 +29,11 @@
   font-size: 1.2em;
 }
 
-
-
+#main-content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 2em;
+  background-color: #F5F0E4;
+}
