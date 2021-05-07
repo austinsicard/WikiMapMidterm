@@ -8,13 +8,22 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  margin-bottom: 4em;
+  //margin-bottom: 4em;
 }
 .main-section-box {
   display: flex;
   flex-direction: column;
   height: 50%;
   padding-top: 3em;
+}
+
+.title {
+  background-color: #F5F0E4;
+  padding: 0 5em 0 5em;
+}
+
+.par {
+  margin-bottom: 0;
 }
 // .box2 {
 //   width: 300px;

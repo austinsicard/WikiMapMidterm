@@ -11,28 +11,34 @@
       <p id="logo">WikiMaps</p>
     </a>
   </form>
-
   
-  <div class="right-btns">
+  <div class="right-side">
     
     <% if (!user) { %>
 
   <form method="GET" action="/register">
-    <button type="button" class="btn btn-outline-primary">Sign up</button>
+    <button type="button" class="btn btn-outline-dark">Sign up</button>
   </form>
 
   <form method="GET" action="/login">
-    <button type="button" class="btn btn-outline-primary">Login</button>
+    <button type="button" class="btn btn-outline-dark">Login</button>
   </form>
 
   <% } else { %>
-      
-    <p> Logged in as <%= user.name %></p>
-      <form method="POST" action="/logout">
-        <button class="btn btn-outline-primary">Logout</button>
-      </form>
-      <a class="btn btn-primary" href="/maps/new">Create new map</a>
-      <a class="btn btn-primary" href="/users/<%=user.id%>" >My profile</a>
+
+      <p id="user-name"> Logged in as <%= user.name %></p>
+      <div id="buttons">
+
+        <a href="/maps/new">
+          <button type="button" class="btn btn-outline-dark">My profile</button>
+        </a>
+        <a href="/users/<%=user.id%>">
+          <button type="button" class="btn btn-outline-dark">My profile</button>
+        </a>
+        <form method="POST" action="/logout">
+          <button type="submit" class="btn btn-outline-dark">Logout</button>
+        </form>
+      </div>
 
     <% } %>
 </div>

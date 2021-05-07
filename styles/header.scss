@@ -1,7 +1,7 @@
 .header-container {
   padding: 0 10% 0 10%;
   height: 100px;
-  background-color: F5F0E4;
+  background-color: #F5F0E4;
   // border: 1px solid black;
   display: flex;
   align-items: center;
@@ -10,9 +10,29 @@
 
 #logo {
   font-family: 'Cormorant', serif;
+  font-size: 2em;
+  a:link {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+}
 }
 
 
-.right-btns {
+.right-side {
   flex-direction: column;
 }
+
+#buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+.btn {
+  margin: 0 0.3em 0 0.1em;
+}
+
+#user-name {
+  font-family: 'Cormorant', serif;
+}
+
