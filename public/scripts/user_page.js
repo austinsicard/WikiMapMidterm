@@ -1,15 +1,15 @@
 $(() => {
   loadUser();
-})
+});
 
 const loadUser = () => {
   $.ajax(`/users/api/${window.location.pathname.split('/')[2]}`, { method: 'GET' })
-  .then(data => {
-    createUserHTML(data);
-  })
-  .catch(err => {
-    res.send(err);
-  })
+    .then(data => {
+      createUserHTML(data);
+    })
+    .catch(err => {
+      res.send(err);
+    });
 };
 
 const createUserHTML = (user) => {
@@ -55,19 +55,6 @@ const createUserHTML = (user) => {
     </div>
     `
   );
-
-  // if user id(from session) === user profile id
-  // its 'own profile
-  // give: create map, my maps, my points, my favourites
-
-
-  //STRETCH
-
-  // if user !== user profile id
-  // it's somebody elses profile
-  // give: user's maps, user's point
-
-  
-}
+};
 
 

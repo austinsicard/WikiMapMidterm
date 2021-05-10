@@ -39,7 +39,7 @@ exports.addUser = addUser;
 
 // list maps
 const listMaps = (db) => {
-  const sql = `SELECT maps.* FROM maps`
+  const sql = `SELECT maps.* FROM maps`;
   return db
     .query(sql)
     .then(result => {
@@ -47,7 +47,7 @@ const listMaps = (db) => {
     })
     .catch(err => {
       return err.message;
-    })
+    });
 };
 exports.listMaps = listMaps;
 
@@ -60,7 +60,7 @@ const getMapById = (db, map_id) => {
     .then((result) => result.rows[0])
     .catch((err) => err.message);
 };
-exports.getMapById= getMapById;
+exports.getMapById = getMapById;
 
 
 
@@ -122,7 +122,7 @@ exports.getPointsByMap = getPointsByMap;
 
 
 // maps, user contributed to
-const getMapsByPoints = (db, user_id ) => {
+const getMapsByPoints = (db, user_id) => {
   const queryString = `
   SELECT maps.*
   FROM maps
@@ -146,7 +146,7 @@ const addFavorite =  (db, map_id, user_id) => {
   return db
     .query(queryString, values)
     .then((result) => {
-      return result.rows[0]
+      return result.rows[0];
     })
     .catch((err) => err.message);
 };
@@ -172,7 +172,7 @@ const editPoint = (db, options) => {
   const queryParams = [];
   let queryString = `UPDATE points SET `;
   //To change Point title
-  if(options.title){
+  if (options.title) {
     queryParams.push(`%${options.title}%`);
     if (queryString.length > 1) {
       queryString += `, title = $${queryParams.length}`;
@@ -181,7 +181,7 @@ const editPoint = (db, options) => {
     }
   }
   //to Change Point description
-  if(options.description){
+  if (options.description) {
     queryParams.push(`%${options.description}%`);
     if (queryString.length > 1) {
       queryString += `, description = $${queryParams.length}`;
@@ -190,7 +190,7 @@ const editPoint = (db, options) => {
     }
   }
   //to Change Point Photo
-  if(options.photo_url){
+  if (options.photo_url) {
     queryParams.push(`%${options.photo_url}%`);
     if (queryString.length > 1) {
       queryString += `, photo_url = $${queryParams.length}`;
@@ -199,7 +199,7 @@ const editPoint = (db, options) => {
     }
   }
   //to Change Point Latitude
-  if(options.lat){
+  if (options.lat) {
     queryParams.push(`%${options.lat}%`);
     if (queryString.length > 1) {
       queryString += `, lat = $${queryParams.length}`;
@@ -208,22 +208,18 @@ const editPoint = (db, options) => {
     }
   }
   //to Change Point Longitude
-  if(options.long){
-  queryParams.push(`%${options.long}%`);
-  if (queryString.length > 1) {
-     queryString += `, long = $${queryParams.length}`;
-   } else {
-     queryString += `long = $${queryParams.length}`;
-   }
+  if (options.long) {
+    queryParams.push(`%${options.long}%`);
+    if (queryString.length > 1) {
+      queryString += `, long = $${queryParams.length}`;
+    } else {
+      queryString += `long = $${queryParams.length}`;
+    }
   }
   queryParams.push(`%${options.points.id}%`);
   queryString += `WHERE points.id = $${queryParams.length}`;
   queryParams.push(`%${options.user_id}%`);
   queryString += `AND user_id = $${queryParams.length};`;
-
-// UPDATE Customers
-// SET ContactName = 'Alfred Schmidt', City= 'Frankfurt'
-// WHERE CustomerID = 1;
 
   return db
     .query(queryString, queryParams)
@@ -246,7 +242,7 @@ const addMap =  (db, {user_id, title, description}) => {
 exports.addMap = addMap;
 
 //Delete a map
-const deleteMap =  (db, map_id) => {
+const deleteMap =  (db, map_id, user_id) => {
   const queryString = `DELETE FROM maps WHERE maps.id = $1) VALUES ($1);`;
   const values = [user_id, map_id];
   return db
@@ -282,9 +278,6 @@ const editMap = (db, options) => {
   queryString += `WHERE maps.id = $${queryParams.length}`;
   queryParams.push(`%${options.user_id}%`);
   queryString += `AND user_id = $${queryParams.length};`;
-// UPDATE Customers
-// SET ContactName = 'Alfred Schmidt', City= 'Frankfurt'
-// WHERE CustomerID = 1;
   return db
     .query(queryString, queryParams)
     .then((result) => result.rows)

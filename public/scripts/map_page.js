@@ -1,35 +1,35 @@
 // pull out the maps from server database
 $(() => {
   loadMap();
-})
+});
 
 let mymap;
 let userName;
 
 // get data from endpoint
-const loadMap = function () {
+const loadMap = function() {
   $.ajax(`/maps/api/${window.location.pathname.split('/')[2]}`, { method: 'GET' }) // get map data
     .then(map => {
       $.ajax(`/users/api/${map.user_id}`, { method: 'GET' }) // get owner's data
-      .then(data => {
-
-        userName = data.name;
-        createMapHTML(map, userName);
-        return;
-      })
-      .catch(err => {
-        res.send(err)
-      });
+        .then(data => {
+          userName = data.name;
+          createMapHTML(map, userName);
+          return;
+        })
+        .catch(err => {
+          res.send(err);
+        });
       $.ajax(`/maps/api/${window.location.pathname.split('/')[2]}/points`, { method: 'GET' }) // get points data
-       .then(data => {
-        renderPoints(data);
-       })
-       .catch(err => {
-        res.send(err);
-      })
-  })
-    .catch(err => {
+        .then(data => {
+          renderPoints(data);
+        })
+        .catch(err => {
+          res.send(err);
+        });
     })
+    .catch(err => {
+      res.send(err);
+    });
 };
 
 
@@ -41,23 +41,23 @@ const renderPoints = function(data) {
 };
 
 
-const createPointElement = function (point){
-  let id = point.id
-  let lat = point.lat
-  let long = point.long
-  let title = point.title
-  let description = point.description
-  let pic = point.photo_url
-  let popupinfo = `<div style = display: flex; flex-direction: column; align-items: center;><a href="/maps/${id}/point"><b>${title}</b></a><br><img src=${pic} style=width:50px;height:60px;><br>${description}</div>`
+const createPointElement = function(point) {
+  let id = point.id;
+  let lat = point.lat;
+  let long = point.long;
+  let title = point.title;
+  let description = point.description;
+  let pic = point.photo_url;
+  let popupinfo = `<div style = display: flex; flex-direction: column; align-items: center;><a href="/maps/${id}/point"><b>${title}</b></a><br><img src=${pic} style=width:50px;height:60px;><br>${description}</div>`;
   marker = L.marker([lat, long]).addTo(mymap);
   marker.bindPopup(popupinfo);
   popup = L.popup();
   return point;
-}
+};
 
 // create map with leaflets
-const createMapElement = function (mapId, lat, long) {
-   mymap = L.map(`map-${mapId}`).setView([lat, long], 12);
+const createMapElement = function(mapId, lat, long) {
+  mymap = L.map(`map-${mapId}`).setView([lat, long], 12);
   L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
@@ -67,16 +67,16 @@ const createMapElement = function (mapId, lat, long) {
     accessToken: 'pk.eyJ1IjoiZHVyYWJpbGxpYW0iLCJhIjoiY2tvYTBtdXQ3Mm1odjJwcXd3MXkycmptcCJ9.NfmIqQQjSypgKHZciDx8rg'
   }).addTo(mymap);
   return mymap;
-}
+};
 
 //create new map container
-const createMapHTML = function (map, userName) {
+const createMapHTML = function(map, userName) {
   const user = userName;
   const title = map.title;
   const description = map.description;
   const lat = map.lat;
   const long = map.long;
-  const mapid = map.id
+  const mapid = map.id;
 
   // HTML for a map container
   $('#main-content').prepend(
@@ -103,14 +103,8 @@ const createMapHTML = function (map, userName) {
   // create map element from leaflets
   createMapElement(mapid, lat, long);
 
-
-// $('#fav-btn').click(function() {
-//   $(this).css('background-color', '#E3E2B7')
-//   $(this).html('Added to Favorites')
-// })
-
-
-    $('#fav-btn').click(function(event) {
+  // add event listener and logic to the favourites button
+  $('#fav-btn').click(function(event) {
     event.preventDefault();
     $.ajax({
       type: "POST",
@@ -118,15 +112,13 @@ const createMapHTML = function (map, userName) {
       data: {
         id: $(this).val(),
       },
-      success: function (result) {
-        $('#fav-btn').css('background-color', '#E3E2B7')
-        $('#fav-btn').html('Added to Favorites')
+      success: function(result) {
+        $('#fav-btn').css('background-color', '#E3E2B7');
+        $('#fav-btn').html('Added to Favorites');
       },
-      error: function (result) {
+      error: function(result) {
         alert('error');
       }
     });
   });
-
-
 };

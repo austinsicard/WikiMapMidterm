@@ -1,23 +1,22 @@
 // pull out the maps from server database
 $(() => {
   createMapHTML();
-})
+});
 
 let mymap;
 
-const createPointElement = function (point) {
-  let id = point.id
-  let lat = point.lat
-  let long = point.long
-  let title = point.title
-  let description = point.description
-  let pic = point.photo_url
-  let popupinfo = `<div style = display: flex; flex-direction: column; align-items: center;><b>${title}</b><br><img src=${pic} style=width:50px;height:60px;><br>${description}</div>`
+const createPointElement = function(point) {
+  let lat = point.lat;
+  let long = point.long;
+  let title = point.title;
+  let description = point.description;
+  let pic = point.photo_url;
+  let popupinfo = `<div style = display: flex; flex-direction: column; align-items: center;><b>${title}</b><br><img src=${pic} style=width:50px;height:60px;><br>${description}</div>`;
   marker = L.marker([lat, long]).addTo(mymap);
   marker.bindPopup(popupinfo);
   popup = L.popup();
   return point;
-}
+};
 
 // create map with leaflets
 
@@ -40,18 +39,15 @@ const createMapElement = function (mapId, lat, long) {
 const createMapHTML = function (map) {
   const lat = map.lat;
   const long = map.long;
-  const mapid = map.id
+  const mapid = map.id;
 
   // HTML for a map container
   $('#main-content').prepend(
-    
     `<div id="map-${mapid}" style="width: 50%; height: 20em; position: relative;">
     </div>
     `
   );
 
-
-
   // create map element from leaflets
   createMapElement(mapid, lat, long);
-  }
+  };

@@ -1,15 +1,6 @@
-/*
- * All routes for Users are defined here
- * Since this file is loaded in server.js into api/users,
- *   these routes are mounted onto /users
- * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
- */
-
-
-
 const express = require('express');
 const router  = express.Router();
-const { getUserById, getMapsByUser, getFavoritesByUser, getMapsByPoints, getUserByEmail } = require('./helperFunctions');
+const { getUserById, getMapsByUser, getFavoritesByUser, getMapsByPoints } = require('./helperFunctions');
 
 module.exports = (db) => {
 
@@ -18,40 +9,38 @@ module.exports = (db) => {
     const templateVars = {
       user: req.user // comes from cookie
     };
-    res.render("userPage", templateVars)
-  })
+    res.render("userPage", templateVars);
+  });
 
   router.get('/api/:id', (req, res) => {
     const id = req.params.id;
     getUserById(db, id)
       .then(data => {
-        res.send(data)
+        res.send(data);
       })
       .catch(err => {
         res.send(err);
-      })
-  })
+      });
+  });
 
   // list user's map
   router.get('/api/:userId/maps', (req, res) => {
-    //const userId = req.session.userId;
     const userId = req.params.userId;
     getMapsByUser(db, userId)
       .then(data => {
-        res.json(data)
-        // res.send(data)
+        res.send(data);
       })
       .catch(err => {
-        res.send(err)
-      })
+        res.send(err);
+      });
   });
 
   router.get("/:userId/maps", (req, res) => {
     const templateVars = {
       user: req.user
     };
-    res.render("userMaps", templateVars)
-  })
+    res.render("userMaps", templateVars);
+  });
 
 
   // list favorites
@@ -59,8 +48,8 @@ module.exports = (db) => {
     const templateVars = {
       user: req.user
     };
-    res.render("favorites", templateVars)
-  })
+    res.render("favorites", templateVars);
+  });
 
 
   router.get('/api/:id/favorites', (req, res) => {
@@ -71,28 +60,28 @@ module.exports = (db) => {
       })
       .catch(err => {
         res.send(err);
-      })
-  })
+      });
+  });
 
 
   // get maps by user's points => maps, user contributed to
   router.get('/api/:userId/maps/points', (req,res) => {
     const userId = req.params.userId;
     getMapsByPoints(db, userId)
-    .then(data => {
-      res.send(data)
-    })
-    .catch(err => {
-      res.send(err)
-    })
-  })
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.send(err);
+      });
+  });
 
   router.get("/:userId/maps/points", (req, res) => {
     const templateVars = {
       user: req.user
     };
-    res.render("userPoints", templateVars)
-  })
+    res.render("userPoints", templateVars);
+  });
 
 
   return router;

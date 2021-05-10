@@ -1,24 +1,23 @@
 $(() => {
   loadPoint();
-})
+});
 
 
 const loadPoint = () => {
   $.ajax(`/maps/points/${window.location.pathname.split('/')[2]}`, { method: 'GET' })
     .then(point => {
-      console.log('Supposed to be a point: ', point)
+      console.log('Supposed to be a point: ', point);
       $.ajax(`/users/api/${point.user_id}`, { method: 'GET' }) // get owner's data
         .then(user => {
-          console.log(user)
-          userName = user.name;
+          const userName = user.name;
           createPointHTML(point, userName);
           return;
         })
         .catch(err => {
-          res.send(err)
-        })
-    })
-}
+          res.send(err);
+        });
+    });
+};
 
 
 const createPointHTML = (point, userName) => {
@@ -45,15 +44,6 @@ const createPointHTML = (point, userName) => {
         <button type="submit">Delete point</button>
     </form>
     `
-  )
+  );
+};
 
-}
-
-
-// for delete button add some effects like alert('Deleted!')
-
-
-// get users name instead of id
-// give the proper user id to link to the user's profile
-// add CSS
-// add link to user profile

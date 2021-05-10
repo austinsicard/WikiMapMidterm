@@ -1,30 +1,30 @@
 $(() => {
   loadFavorites();
-})
+});
 
 const loadFavorites = () => {
   $.ajax(`/users/api/${window.location.pathname.split('/')[2]}/favorites`, { method: 'GET' })
-  .then(data => {
-    renderFavorites(data);
-  })
-  .catch(err => {
-    res.send(err)
-  })
-}
+    .then(data => {
+      renderFavorites(data);
+    })
+    .catch(err => {
+      res.send(err);
+    });
+};
 
 const renderFavorites = function(data) {
-  for(let map of data) {
+  for (let map of data) {
     createMapHTML(map);
   }
-}
+};
 
 //create new map container
-const createMapHTML = function (map) {
+const createMapHTML = function(map) {
   const title = map.title;
   const description = map.description;
   const lat = map.lat;
   const long = map.long;
-  const mapid = map.id
+  const mapid = map.id;
 
   // HTML for a map container
   $('#main-content').prepend(
@@ -50,7 +50,7 @@ const createMapHTML = function (map) {
 };
 
 // create map with leaflets
-const createMapElement = function (mapId, lat, long) {
+const createMapElement = function(mapId, lat, long) {
   let mymap = L.map(`map-${mapId}`).setView([lat, long], 12);
   L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
